@@ -2,14 +2,22 @@ import React from 'react';
 import {Card, Table} from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 
-import DayColumn from './grid/DayColumn';
+import DayColumn from './DayColumn';
 import WeekList from '../models/WeekList';
 import EcamCourse from '../models/EcamCourse';
 
+import './calendar.css';
+
+/// Sert à définir quels sont les "props" que la classe "CalendarView" utilise
 interface CalendarViewProps<T extends EcamCourse> {
     courses?: T[];
 }
 
+/*
+La classe qui représente le calendrier
+Dans son render(), elle renvoie une table avec une colonne pour chaque jour de la semaine (la classe est définie dans "DayColumn.tsx")
+La 1re colonne est utilisée pour diviser la table suivant l'heure de la journée 
+*/
 class CalendarView extends React.Component<CalendarViewProps<EcamCourse>> {
     columns: ColumnsType<WeekList> = [
         {
@@ -28,12 +36,6 @@ class CalendarView extends React.Component<CalendarViewProps<EcamCourse>> {
         new DayColumn("Sunday")
     ];
 
-    // courses: EcamCourse[];
-
-    // constructor(props: any, coursesList: EcamCourse[]) {
-    //     super(props);
-    //     this.courses = props.coursesList;
-    // }
     constructor({courses = []}: CalendarViewProps<EcamCourse>) {
         super({courses});
     }
@@ -43,6 +45,7 @@ class CalendarView extends React.Component<CalendarViewProps<EcamCourse>> {
             new WeekList("0", 0)
         ];
 
+        // On récupère la liste de tous les cours avec l'objet props, hérité de la classe "React.Component"
         let x = this.props.courses;
         
         for (let i = 8; i < 22; i++) {
@@ -50,8 +53,10 @@ class CalendarView extends React.Component<CalendarViewProps<EcamCourse>> {
             
             let w: WeekList = new WeekList(timekey, i);
             
+            // 1er filtre pour récupérer uniquement les cours qui commencent à l'heure indiquée
             let c: EcamCourse[] | undefined = x?.filter((course) => course.starttime.getHours() === i);
 
+            // Un filtre par jour pour compléter les listes de l'objet WeekList
             w.monday = c?.filter((course) => course.starttime.getDay() === 1) ?? [];
             w.tuesday = c?.filter((course) => course.starttime.getDay() === 2) ?? [];
             w.wednesday = c?.filter((course) => course.starttime.getDay() === 3) ?? [];
@@ -65,7 +70,13 @@ class CalendarView extends React.Component<CalendarViewProps<EcamCourse>> {
 
         return (
             <Card>
-                <Table columns={this.columns} dataSource={data} pagination={false} />
+                <Table
+                    columns={this.columns}
+                    dataSource={data}
+                    pagination={false}
+                    footer={() => 'Footer'}
+                    bordered 
+                />
             </Card>
         )
     }

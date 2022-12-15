@@ -4,9 +4,9 @@ interface EcamCourse {
     starttime: Date;
     endtime: Date;
     local: string;
-    name: string;
-    description: string;
-    labo: boolean;
+    name: string; // Nom du cours
+    description: string; // Description du cours
+    labo: boolean; // Si le cours est un labo
 }
 
 export default EcamCourse;
