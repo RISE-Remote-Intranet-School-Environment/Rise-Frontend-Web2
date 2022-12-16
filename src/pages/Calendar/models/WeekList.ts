@@ -2,7 +2,9 @@ import EcamCourse from "./EcamCourse";
 
 class WeekList {
     key: string;
+    // Identifies the line number into the table
     timecode: number;
+    // An array for each day
     monday: EcamCourse[] = [];
     tuesday: EcamCourse[] = [];
     wednesday: EcamCourse[] = [];
@@ -16,6 +18,7 @@ class WeekList {
         this.timecode = timecode;
     }
 
+    // Method used to retrieve the corresponded list with the day's name (in lowerCase string)
     getDay(day: string) {
         switch (day) {
             case "monday": return this.monday;

@@ -3,9 +3,8 @@ import React from 'react';
 import CalendarView from './Calendar/views/Calendar';
 import EcamCourse from './Calendar/models/EcamCourse';
 
-// J'ai créé un exemple de cours pour l'afficher sur le calendrier
-// Libre à vous de le tester avec une liste plus fournie de cours
-// La classe est définie dans "models/EcamCourse", comme précisée dans l'importation
+// You can make a list of "EcamCourse" if you want to test the calendar with many courses
+// Be aware to modify './Calendar/views/DayColumn.tsx' with a loop to go through all courses
 const course: EcamCourse = {
     id: "1",
     groupId: "3BE",

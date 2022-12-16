@@ -5,8 +5,8 @@ import type { ReactNode } from 'react';
 import WeekList from '../models/WeekList';
 import './timeslot.css';
 
-/// La classe qui prend en charge la représentation des différents cours dans le calendrier
-/// Suivant le jour concerné, défini par la variable "dataIndex"
+/// A class to describe each day of the week in the table
+/// To avoid repetitivity, because the render for each column is the same to display all the courses
 class DayColumn implements ColumnType<WeekList> {
     title: string;
     className: string = "dayColumn";
@@ -17,9 +17,11 @@ class DayColumn implements ColumnType<WeekList> {
         this.dataIndex = title.toLowerCase();
     }
 
+    // Render defined in these column used for each entry in the table
     render?: ((value: any, record: WeekList, index: number) => ReactNode | RenderedCell<WeekList>) | undefined = (_, record, index) => {
         // console.log(record.getDay(this.dataIndex).length)
         let courses = record.getDay(this.dataIndex);
+        // When there are no courses for a day, do nothing
         if (courses.length === 0) {
             return
         }
@@ -28,12 +30,12 @@ class DayColumn implements ColumnType<WeekList> {
         let start_minutes = course.starttime.getMinutes();
         let end_minutes = course.endtime.getMinutes();
 
-        // Permet de définir la taille du block à l'aide des heures de début et de fin
+        // We can compute the relative block's length with the help of start and end times for each course
         let length = course.endtime.getHours() - course.starttime.getHours() + (end_minutes - start_minutes)/60
 
-        // J'utilise les valeurs en pourcentages pour les placer dans le tableau suivant le repère supérieur de la case
-        // zIndex sert, grâce à l'index de chaque ligne, à faire superposer les cours définis plus tard dans la journée au dessus des précédents
-        // J'ai défini quelques couleurs d'arrière-plan pour chaque option d'étude dans "timeslot.css"
+        // I use percentages to create a relative position from the top of each cell, and the length of each course
+        // zIndex is used to place later courses above the previous ones (for example, conflict with courses for different study year)
+        // I defined some background colors in "timeslot.css" to differentiate each study's option, and use the className propertie to choose which take
         return (
             <div 
                 className={'timeslot ' + course.groupId.substring(1)}
@@ -42,7 +44,7 @@ class DayColumn implements ColumnType<WeekList> {
                 <a onClick={(event) => undefined}>{course.name}</a>
             </div>
         );
-        // Il reste à ajouter un évènement quand on clique sur l'intitulé du cours pour faire afficher les détails
+        // Just have to add an event to display all the details for a course when we click on it
     };
 }
 

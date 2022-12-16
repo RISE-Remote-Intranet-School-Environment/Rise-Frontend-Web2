@@ -1,5 +1,5 @@
 
-
+/* Same properties for each course */
 .timeslot {
     border: 1px solid;
     border-radius: 4px;
@@ -8,6 +8,7 @@
 }
 
 /* List of colors for each branch */
+/* See how we use the last letters to differentiate each */
 /* Bachelor */
 .BA {
     background-color: yellow;

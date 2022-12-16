@@ -8,15 +8,14 @@ import EcamCourse from '../models/EcamCourse';
 
 import './calendar.css';
 
-/// Sert à définir quels sont les "props" que la classe "CalendarView" utilise
+/// Used to define which "props" type is used by "CalendarView"
 interface CalendarViewProps<T extends EcamCourse> {
     courses?: T[];
 }
 
 /*
-La classe qui représente le calendrier
-Dans son render(), elle renvoie une table avec une colonne pour chaque jour de la semaine (la classe est définie dans "DayColumn.tsx")
-La 1re colonne est utilisée pour diviser la table suivant l'heure de la journée 
+The Calendar class
+The render() method return a table subdivised in 7 days (see "DayColumn.tsx"), plus 1 column used for each hour
 */
 class CalendarView extends React.Component<CalendarViewProps<EcamCourse>> {
     columns: ColumnsType<WeekList> = [
@@ -45,7 +44,7 @@ class CalendarView extends React.Component<CalendarViewProps<EcamCourse>> {
             new WeekList("0", 0)
         ];
 
-        // On récupère la liste de tous les cours avec l'objet props, hérité de la classe "React.Component"
+        // Retreive all courses with the "props" object, inherited from "React.Component"
         let x = this.props.courses;
         
         for (let i = 8; i < 22; i++) {
@@ -53,10 +52,10 @@ class CalendarView extends React.Component<CalendarViewProps<EcamCourse>> {
             
             let w: WeekList = new WeekList(timekey, i);
             
-            // 1er filtre pour récupérer uniquement les cours qui commencent à l'heure indiquée
+            // 1rst filter to take all courses starting at the row's hour
             let c: EcamCourse[] | undefined = x?.filter((course) => course.starttime.getHours() === i);
 
-            // Un filtre par jour pour compléter les listes de l'objet WeekList
+            // 2nd filter to sort each course for each day
             w.monday = c?.filter((course) => course.starttime.getDay() === 1) ?? [];
             w.tuesday = c?.filter((course) => course.starttime.getDay() === 2) ?? [];
             w.wednesday = c?.filter((course) => course.starttime.getDay() === 3) ?? [];
@@ -65,9 +64,12 @@ class CalendarView extends React.Component<CalendarViewProps<EcamCourse>> {
             w.saturday = c?.filter((course) => course.starttime.getDay() === 6) ?? [];
             w.sunday = c?.filter((course) => course.starttime.getDay() === 0) ?? [];
             
+            // Push the entry into the table lines' array
             data.push(w);
         }
 
+        // I wanted to use the "footer" propertie to display the details of a course that've been clicked by the user
+        // But you're fre to use an other method to do so
         return (
             <Card>
                 <Table
