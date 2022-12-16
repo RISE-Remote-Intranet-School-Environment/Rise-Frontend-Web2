@@ -13,6 +13,7 @@ const course: EcamCourse = {
     local: "2E51",
     name: "Test",
     description: "Ceci est un test",
+    teacherName: "Teacher",
     labo: false
 }
 

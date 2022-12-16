@@ -5,8 +5,9 @@ interface EcamCourse {
     endtime: Date;
     local: string;
     name: string; // Course's name
-    description: string; // Course's description
-    labo: boolean; // If the course is a lab
+    description?: string; // Course's description
+    teacherName?: string;
+    labo?: boolean; // If the course is a lab
 }
 
 export default EcamCourse;

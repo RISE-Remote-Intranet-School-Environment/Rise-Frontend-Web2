@@ -20,6 +20,7 @@ class DayColumn implements ColumnType<WeekList> {
     // Render defined in these column used for each entry in the table
     render?: ((value: any, record: WeekList, index: number) => ReactNode | RenderedCell<WeekList>) | undefined = (_, record, index) => {
         // console.log(record.getDay(this.dataIndex).length)
+        
         let courses = record.getDay(this.dataIndex);
         // When there are no courses for a day, do nothing
         if (courses.length === 0) {

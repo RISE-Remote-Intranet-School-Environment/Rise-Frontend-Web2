@@ -69,7 +69,7 @@ class CalendarView extends React.Component<CalendarViewProps<EcamCourse>> {
         }
 
         // I wanted to use the "footer" propertie to display the details of a course that've been clicked by the user
-        // But you're fre to use an other method to do so
+        // But you're free to use an other method to do so
         return (
             <Card>
                 <Table
