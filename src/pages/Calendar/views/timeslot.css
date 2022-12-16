@@ -1,0 +1,63 @@
+
+
+.timeslot {
+    border: 1px solid;
+    border-radius: 4px;
+    width: 80%;
+    position: absolute;
+}
+
+/* List of colors for each branch */
+/* Bachelor */
+.BA {
+    background-color: yellow;
+}
+
+.BC {
+    background-color: red;
+}
+
+.BE {
+    background-color: darkblue;
+}
+
+.BM {
+    background-color: blue;
+}
+
+.BS {
+    background-color: green;
+}
+
+/* Master */
+.MEM {
+    background-color: lightskyblue;
+}
+
+.MAU {
+    background-color: aqua;
+}
+
+.MEO {
+    background-color: violet;
+}
+
+.MIN {
+    background-color: blueviolet;
+}
+
+.MCO {
+    background-color: darkred;
+}
+
+.MGE {
+    background-color: lightgray;
+}
+
+.MIS {
+    background-color: greenyellow;
+}
+
+.MBA {
+    background-color: pink;
+}

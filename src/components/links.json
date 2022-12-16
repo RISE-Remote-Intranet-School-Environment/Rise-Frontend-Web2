@@ -1,0 +1,28 @@
+{
+    "links": [
+        {
+            "label": "Home",
+            "href" : "/home"  
+        },
+        {
+            "label": "Calendar",
+            "href" : "/calendar"
+        },
+        {
+            "label": "Notes",
+            "href" : "/notes"
+        },
+        {
+            "label": "Forum",
+            "href" : "/forum"
+        },
+        {
+            "label": "Syllabus",
+            "href" : "/syllabus"
+        },
+        {
+            "label": "Login",
+            "href" : "/login"
+        }
+    ]
+}

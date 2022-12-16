@@ -1,29 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import {add} from 'date-fns';
-
-import CalendarView from './Calendar/views/Calendar';
-import EcamCourse from './Calendar/models/EcamCourse';
-
-// J'ai créé un exemple de cours pour l'afficher sur le calendrier
-// Libre à vous de le tester avec une liste plus fournie de cours
-// La classe est définie dans "models/EcamCourse", comme précisée dans l'importation
-const course: EcamCourse = {
-  id: "1",
-  groupId: "3BE",
-  starttime: new Date(2022, 11, 5, 12, 45, 0, 0),
-  endtime: new Date(2022, 11, 5, 16, 15, 0, 0),
-  local: "2E51",
-  name: "Test",
-  description: "Ceci est un test",
-  labo: false
-}
+import Nav from './components/Nav';
+import StickyFooter from './components/StickyFooter';
+import HomePage from './pages/Home';
+import CalendarPage from './pages/Calendar';
+import SyllabusPage from './pages/Syllabus';
+import NotesPage from './pages/Notes';
+import ForumPage from './pages/Forum';
+import LoginPage from './pages/Login';
+import {Route, Routes} from "react-router-dom";
 
 function App() {
   return (
     <>
-      <CalendarView courses={[course]}/>
+      <Nav />
+      <div className='container'>
+        <Routes>
+          <Route path= '/' element={<HomePage/>}/>
+          <Route path= '/home' element={<HomePage/>}/>
+          <Route path= '/calendar' element={<CalendarPage/>}/>
+          <Route path= '/syllabus' element={<SyllabusPage/>}/>
+          <Route path= '/notes' element={<NotesPage/>}/>
+          <Route path= '/forum' element={<ForumPage/>}/>
+          <Route path= '/login' element={<LoginPage/>}/>
+        </Routes>
+        <StickyFooter/>
+      </div>
     </>
   );
 }
