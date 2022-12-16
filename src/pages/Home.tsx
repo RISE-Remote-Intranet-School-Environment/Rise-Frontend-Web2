@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Home.module.css';
 
-const ECAMBAT = require("./Ecam_Batiment.jpg");
+import ECAMBAT from "./Ecam_Batiment.jpg";
 
 export interface IHomePageProps{}
 
