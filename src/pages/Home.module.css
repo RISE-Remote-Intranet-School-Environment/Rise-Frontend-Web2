@@ -1,0 +1,5 @@
+.image-container {
+    width: 2880px;
+    height: 1920px;
+    object-fit: fill;
+}
