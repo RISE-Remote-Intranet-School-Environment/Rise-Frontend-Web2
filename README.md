@@ -63,10 +63,11 @@ We have observed that the configuration and launch of the project was very tedio
 HOW TO LAUNCH THE PROJECT (requires Npm): 
 
 Open a Cmd prompt in the project directory. (RFW in this case) 
+Type following commands:
 
-Type Npm install. (to install dependencies and packages used) 
+###'Npm install' (to install dependencies and packages used) 
 
-Type Npm start. 
+###'Npm start' 
 
 For this new version of the project, we decided to switch from JavaScript to TypeScript and to throw away Python. We used React to create and power our website. There is a lot of documentation and  tutorials about it so if you need any help you can always browse the internet for help. 
 
