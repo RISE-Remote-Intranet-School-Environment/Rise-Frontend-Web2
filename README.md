@@ -44,3 +44,44 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+# Architecture and Software quality: 
+
+# Frontend web of R.I.S.E project 
+
+The previous version of the project that we inherited used the following technologies: 
+
+Python. 
+
+JavaScript with the Next.js and React framework. 
+
+Npm. 
+
+We have observed that the configuration and launch of the project was very tedious and complicated. We have then decided to make an easy launch our priority. 
+
+HOW TO LAUNCH THE PROJECT (requires Npm): 
+
+Open a Cmd prompt in the project directory. (RFW in this case) 
+
+Type Npm install. (to install dependencies and packages used) 
+
+Type Npm start. 
+
+For this new version of the project, we decided to switch from JavaScript to TypeScript and to throw away Python. We used React to create and power our website. There is a lot of documentation and  tutorials about it so if you need any help you can always browse the internet for help. 
+
+For the Menu part of the WebSite there are two main things we made: 
+
+A Navbar component which is the menu on top of the website, in this navbar are Links to the pages we created, we already have created all the Pages we should require for the project but if you want to add a page you need to create it in the pages folder and add a link in the links.json file. Then you need to route it by adding it’s route in to the App.tsx file. The footer is just a copy of the Navbar and will be shown on the bottom of the page. With some additional css files we are able to give it’s styling and give the different colors. We also added a route to Home when clicking on the Logo Container and we defined a “default” route to the homepage for when the website is launched using npm start. 
+
+For the Login page we used an mui component, which is an online library where you can find components for your React application, and put it on the login page this will show you a form to login and the given username and password can be collected to send them the database and be compared to see if the user exists or not and then can login to it’s own version of the website with its own syllabus page etc... 
+
+On the HomePage there is just an image that gets shown because we didn’t know what to put here but if you want to make/design a homepage you just need to put your code in the Homepage file. 
+
+ 
+
+Points to improve and still to create: 
+
+-Grade page on the note page there still needs to be an frontend created to show and display the different grades of a student. 
+
+-Forum page also needs to be created, there needs to be communication with the student help team to know what they want to implement and how they see their forum page to implement the different uses they want. 
