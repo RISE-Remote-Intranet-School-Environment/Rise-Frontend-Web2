@@ -1,5 +1,13 @@
 .image-container {
     width: 2880px;
     height: 1920px;
+    /* max-width: 99%;
+    max-height: 99%; */
     object-fit: fill;
+    background-image: url("Ecam_Batiment.jpg");
+}
+
+img {
+    object-fit: fill;
+    /* size */
 }
