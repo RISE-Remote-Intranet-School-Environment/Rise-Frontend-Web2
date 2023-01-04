@@ -1,30 +1,27 @@
 import * as React from 'react';
-import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
-import { visuallyHidden } from '@mui/utils';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Button, List,ListItem,ListItemButton,ListItemText, Drawer, IconButton } from '@mui/material';
+import { Button, List,ListItem,ListItemButton,ListItemText, Drawer, IconButton, ListItemIcon } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import DeleteIcon from '@mui/icons-material/Delete';
+import {EnhancedTableToolbar, Data, EnhancedTableHead, Order} from './Syllabus/tools/enhancedTable'
 
-interface Data {
-  name: string;
-  Year:string;
-  teacher:string;
-  price:number ;
-}
+
 
 //This data should be fetched from the Database in the future
 const API_DATA = [
@@ -46,153 +43,15 @@ const API_DATA = [
 ];
 
 
-type Order = 'asc' | 'desc';
-
-
-
-interface HeadCell {
-  disablePadding: boolean;
-  id: keyof Data;
-  label: string;
-  numeric: boolean;
-}
-
-const headCells: readonly HeadCell[] = [
-  {
-    id: 'name',
-    numeric: false,
-    disablePadding: true,
-    label: 'Name',
-  },
-  {
-    id: 'Year',
-    numeric: true,
-    disablePadding: false,
-    label: 'Year',
-  },
-  {
-    id: 'teacher',
-    numeric: true,
-    disablePadding: false,
-    label: 'teacher',
-  },
-  {
-    id: 'price',
-    numeric: true,
-    disablePadding: false,
-    label: 'price',
-  },
-  
-];
-
-interface EnhancedTableProps {
-  numSelected: number;
-  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
-  onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  order: Order;
-  orderBy: string;
-  rowCount: number;
-}
-
-//Table additional functions
-function EnhancedTableHead(props: EnhancedTableProps) {
-  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
-    props;
-  const createSortHandler =
-    (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
-      onRequestSort(event, property);
-    };
-  
-  return (
-    <TableHead>
-      <TableRow>
-        <TableCell padding="checkbox">
-          <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{
-              'aria-label': 'select all desserts',
-            }}
-          />
-        </TableCell>
-        {headCells.map((headCell) => (
-          <TableCell
-            key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'normal'}
-            sortDirection={orderBy === headCell.id ? order : false}
-          >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <Box component="span" sx={visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </Box>
-              ) : null}
-            </TableSortLabel>
-          </TableCell>
-        ))}
-      </TableRow>
-    </TableHead>
-  );
-}
-
-interface EnhancedTableToolbarProps {
-  numSelected: number;
-}
-
-//Top of the screen
-function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
-  const { numSelected } = props;
-  return (
-    <Toolbar
-      sx={{
-        pl: { sm: 2 },
-        pr: { xs: 1, sm: 1 },
-        ...(numSelected > 0 && {
-          bgcolor: (theme) =>
-            alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
-        }),
-      }}
-    >
-      {numSelected > 0 ? (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
-        >
-          {numSelected} selected
-        </Typography>
-      ) : (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        >
-          Syllabus
-        </Typography>
-      )}
-    </Toolbar>
-  );
-}
-
 export default function SyllabusPage() {
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('Year');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [selected, setSelected] = React.useState<readonly string[]>([]);
-  const [cart, setCart] = React.useState<readonly Data[]>([]);
   const [isOpen, setIsOpen]= React.useState(false);
 
+  //Not implemented yet
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
     property: keyof Data,
@@ -234,7 +93,6 @@ export default function SyllabusPage() {
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
-    console.log(newPage,page)
   };
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -248,48 +106,89 @@ export default function SyllabusPage() {
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - tableData.length) : 0;
-  //Filter the table with dropdown
+  //Filter the table with dropdown menu
   const [selection, setSelection] = React.useState("");
-  function handleChange(event: SelectChangeEvent) {
+  function handleChange(event: SelectChangeEvent) { 
     setSelection(event.target.value);
-    console.log("ev",API_DATA)
     let _vals = event.target.value
       ? API_DATA.filter(r => r.Year === event.target.value)
       : API_DATA;
     setTableData(_vals);
     setSelected([]);
-    console.log("tbs",tableData)
   }
   //Adding elements to cart
+  const [cart, setCart] = React.useState<readonly Data[]>([]);
   let inCart:string[]=[]
   function addCart(){
-    cart.map(item=>{
-      inCart= inCart.concat(item.name)
-    })
+    let newCart:Data[]=[]
     selected.map(row=>
       {
         var x:Data=API_DATA.filter(r=>r.name===row)[0]
-        if(cart && cart.length>0){
-          cart.map(item=>{
-          if (inCart.includes(row)){ //item is in cart
-            console.log('item',item)}
-            else{ //item not in cart
-              console.log('selected',row,'item',item)
-              setCart(cart.concat(x));
-            }
-          })
-        }
-        else {
-          console.log('row',row)
-          setCart(cart.concat(x));
-        }   
+        newCart = newCart.concat(x)
     })
+    newCart= (newCart.filter(element =>{
+      return !(cart.includes(element))
+    }))
+    setCart(cart.concat(newCart))
+    return 0
   }
-  return (  
+  ///
+  function delCart(name:string){
+    setCart(cart.filter(r=>r.name!=name))
+    return 0
+  }
+  ///
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    if(cart.length>0){
+      setOpen(true);
+    }
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setPay(false);
+  }
+  const [pay, setPay] = React.useState(false);
+  const handleClickPay= () =>{
+    setPay(true)
+  }
+  return ( 
+    
     <Box display="flex" 
     alignItems="center"
     justifyContent="center"
     sx={{ width: '100%' }}>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Confirm Order?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert  -dialog-description">
+            Proceed to payment?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClickPay} autoFocus>
+            Go to Payment
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+      open={pay}
+      onClose={handleClose}>
+        <DialogContent>
+            <DialogContentText id="alert  -dialog-description">
+              Thank you for your purchase
+            </DialogContentText>
+        </DialogContent>
+      </Dialog>
       <Paper sx={{ width: '50%', mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
@@ -391,13 +290,33 @@ export default function SyllabusPage() {
       <Drawer 
         anchor='right' 
         open={isOpen}
-        onClose={()=>setIsOpen(false)}><List>
-        {cart.map((items,i)=><ListItem disablePadding key={items.name}>
+        onClose={()=>setIsOpen(false)}>
+      <List>
+        
+        {cart.map((items,i)=> //loops on the cart 
+        <ListItem 
+        sx={{}}
+        disablePadding key={items.name}>
             <ListItemButton>
               <ListItemText primary= {items.name+"    Price: "+items.price} />
             </ListItemButton>
-          </ListItem>)}
-      </List></Drawer>
+            <OutlinedInput
+            readOnly={true  }
+            key ={items.price}
+            type="number"
+            placeholder="1"
+            />
+            <ListItemButton
+            onClick={(e)=>{delCart(items.name)}}>
+              <ListItemIcon> <DeleteIcon/> </ListItemIcon>
+            </ListItemButton>
+        </ListItem>)}
+        <Button onClick={(e)=>{handleClickOpen()}}
+        >
+          Confirm 
+        </Button>
+      </List>
+      </Drawer>
     </Box>
   );
 }
