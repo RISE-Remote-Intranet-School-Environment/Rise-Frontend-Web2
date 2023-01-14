@@ -86,6 +86,6 @@ On the HomePage there is just an image that gets shown because we didn’t know 
 
 Points to improve and still to create: 
 
--Grade page on the note page there still needs to be an frontend created to show and display the different grades of a student. 
+-Grade page on the "Note" page there still needs to be an frontend created to show and display the different grades of a student. 
 
--Forum page also needs to be created, there needs to be communication with the student help team to know what they want to implement and how they see their forum page to implement the different uses they want. 
+-Forum page also needs to be created, there needs to be communication with the student help team to know what they want to implement and how they see their forum page to implement the different widgets they want. 
