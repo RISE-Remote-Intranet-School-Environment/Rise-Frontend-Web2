@@ -1,9 +1,9 @@
 
 
 # Architecture and Software quality: 
-Emene Abbah 17282
-Yann De Middelaer 18281
-Edouard de Schietere de Lophem 18072
+- Emene Abbah 17282
+- Yann De Middelaer 18281
+- Edouard de Schietere de Lophem 18072
 
 ## Front-End-Web of R.I.S.E project 
 
