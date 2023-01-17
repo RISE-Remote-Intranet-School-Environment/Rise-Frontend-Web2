@@ -1,0 +1,71 @@
+.timeslot {
+    display: flex;
+    flex-direction: row;
+    align-content: space-around;
+    height: 72px;
+}
+
+/* Same properties for each course */
+.event {
+    border: 1px solid;
+    border-radius: 4px;
+    padding: 2px;
+    position: absolute;
+}
+
+/* List of colors for each branch */
+/* See how we use the last letters to differentiate each */
+
+/* Bachelor */
+.BA {
+    background-color: yellow;
+}
+
+.BC {
+    background-color: red;
+}
+
+.BE {
+    background-color: darkblue;
+}
+
+.BM {
+    background-color: blue;
+}
+
+.BS {
+    background-color: green;
+}
+
+/* Master */
+.MEM {
+    background-color: lightskyblue;
+}
+
+.MAU {
+    background-color: aqua;
+}
+
+.MEO {
+    background-color: violet;
+}
+
+.MIN {
+    background-color: blueviolet;
+}
+
+.MCO {
+    background-color: darkred;
+}
+
+.MGE {
+    background-color: lightgray;
+}
+
+.MIS {
+    background-color: greenyellow;
+}
+
+.MBA {
+    background-color: pink;
+}
