@@ -10,6 +10,11 @@ interface TimeSlotProps<T extends EcamCourse> {
     clickHandler(course: T): void
 }
 
+/**
+ * Table's cell
+ * 
+ * Where each course is rendered in each table's cell
+ */
 class TimeSlot extends React.Component<TimeSlotProps<EcamCourse>> {
     handleClick(course: EcamCourse) {
         this.props.clickHandler(course);
