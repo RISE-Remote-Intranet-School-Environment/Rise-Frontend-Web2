@@ -1,3 +1,6 @@
+/**
+ * Interface used to define fields who describe an ECAM course
+ */
 interface EcamCourse {
     id: string; // unique Id to identifie each course into the calendar
     groupId: string; // student's choice of studies

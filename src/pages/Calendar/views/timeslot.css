@@ -1,8 +1,15 @@
+.timeslot {
+    display: flex;
+    flex-direction: row;
+    align-content: space-around;
+    height: 72px;
+}
+
 /* Same properties for each course */
 .event {
     border: 1px solid;
     border-radius: 4px;
-    width: 80%;
+    padding: 2px;
     position: absolute;
 }
 

@@ -9,8 +9,11 @@ import EcamCourse from '../models/EcamCourse';
 // Used to define the function type which take care of the selected event
 type SelectionHandler = (course: EcamCourse) => void;
 
-/// A class to describe each day of the week in the table
-/// To avoid repetitivity, because the render for each column is the same to display all the courses
+/**
+ * A class to describe each day of the week in the table
+ * 
+ * To avoid repetitivity, because the render for each column is the same to display all the courses
+ */
 class DayColumn implements ColumnType<WeekList> {
     title: string;
     // If you want to add properties for each column, there is the className
@@ -31,8 +34,6 @@ class DayColumn implements ColumnType<WeekList> {
     // Render defined in these column used for each entry in the table
     render?: ((value: any, record: WeekList, index: number) => ReactNode | RenderedCell<WeekList>) | undefined = (_, record, index) => {
         let courses = record.getDay(this.dataIndex);
-        // When there are no courses for a day, do nothing
-        if (courses.length === 0) return
 
         return (
             <>
