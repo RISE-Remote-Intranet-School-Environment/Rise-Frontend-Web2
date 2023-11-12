@@ -8,7 +8,7 @@
 /* Same properties for each course */
 .event {
     border: 1px solid;
-    border-radius: 4px;
+    border-radius: 10px;
     padding: 2px;
     position: absolute;
 }
