@@ -1,9 +1,7 @@
 import React from 'react';
-
 // Pop-up imports
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-
 import EcamCourse from '../models/EcamCourse';
 import CalendarTable from './CalendarTable';
 
