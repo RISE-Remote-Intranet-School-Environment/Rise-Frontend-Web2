@@ -23,7 +23,7 @@ class TimeSlot extends React.Component<TimeSlotProps<EcamCourse>> {
     render(): React.ReactNode {
         return (
             <div className="timeslot">
-                {this.props.courses.map((course) => {
+                {this.props.courses.map((course, index) => {
                     let start_minutes = course.starttime.getMinutes();
                     let end_minutes = course.endtime.getMinutes();
 
@@ -33,8 +33,11 @@ class TimeSlot extends React.Component<TimeSlotProps<EcamCourse>> {
                     // I use percentages to create a relative position from the top of each cell, and the length of each course
                     // zIndex is used to place later courses above the previous ones (for example, conflict with courses for different study year)
                     // I defined some background colors in "timeslot.css" to differentiate each study's option, and use the className propertie to choose which take
+                    console.log('Courses:', this.props.courses); //diplays courses just to check it works
+
                     return (
-                        <div 
+                        <div
+                            key={index}
                             className={'event ' + course.groupId.substring(1)}
                             style={{
                                 "top": (start_minutes*100/60).toString() + "%",
@@ -42,7 +45,7 @@ class TimeSlot extends React.Component<TimeSlotProps<EcamCourse>> {
                                 "zIndex": this.props.rowIndex
                             }}
                             // onClick={(e) => {
-                            //     this.props.clickHandler(course);
+                            //     this.props.clickHandler(courses);
                             // }}
                         >
                             <button onClick={(e) => this.handleClick(course)}>{course.name}</button>

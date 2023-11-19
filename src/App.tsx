@@ -23,7 +23,7 @@ function App() {
           <Route path= '/forum' element={<ForumPage/>}/>
           <Route path= '/login' element={<LoginPage/>}/>
         </Routes>
-        <StickyFooter/>
+
       </div>
     </>
   );

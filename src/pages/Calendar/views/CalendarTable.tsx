@@ -11,6 +11,8 @@ import './calendartable.css';
 interface CalendarTableProps<T extends EcamCourse> {
     data?: T[];
     selectionHandler(course: T): void
+    startDate: Date;
+    endDate: Date;
 }
 
 class CalendarTable extends React.Component<CalendarTableProps<EcamCourse>> {
@@ -25,7 +27,7 @@ class CalendarTable extends React.Component<CalendarTableProps<EcamCourse>> {
                     <button
                         onClick={(e) => undefined}
                         className={"hour"}>
-                            {num + "h^"}
+                            {num + "h"}
                     </button>,
             },
             new DayColumn("Monday", this.props.selectionHandler),
@@ -45,8 +47,8 @@ class CalendarTable extends React.Component<CalendarTableProps<EcamCourse>> {
         // Retreive all courses with the "props" object, inherited from "React.Component"
         let x = this.props.data;
         
-        for (let i = 8; i < 22; i++) {
-            const timekey = i.toString() + "h^";
+        for (let i = 8; i < 20; i++) {
+            const timekey = i.toString() + "h";
             
             let w: WeekList = new WeekList(timekey, i);
             
@@ -75,8 +77,7 @@ class CalendarTable extends React.Component<CalendarTableProps<EcamCourse>> {
                     columns={columns}
                     dataSource={data}
                     pagination={false}
-                    footer={() => 'Footer'}
-                    bordered 
+                    bordered
                 />
             </Card>
         )
