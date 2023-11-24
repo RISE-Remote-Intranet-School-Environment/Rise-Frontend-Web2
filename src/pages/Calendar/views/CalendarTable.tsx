@@ -13,6 +13,7 @@ interface CalendarTableProps<T extends EcamCourse> {
     selectionHandler(course: T): void
     startDate: Date;
     endDate: Date;
+    currentWeekStartDate: Date; // Add currentWeekStartDate property
 }
 
 class CalendarTable extends React.Component<CalendarTableProps<EcamCourse>> {

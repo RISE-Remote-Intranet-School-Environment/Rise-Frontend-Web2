@@ -22,6 +22,7 @@ interface CalendarViewProps<T extends EcamCourse> {
 interface CalendarViewState<T extends EcamCourse> {
     selectedCourse?: T;
     currentDate: Date;
+    currentWeekStartDate: Date;
 }
 
 /**
@@ -35,9 +36,14 @@ class CalendarView extends React.Component<
 > {
     constructor(props: CalendarViewProps<EcamCourse>) {
         super(props);
+        const currentDate = new Date();
+        const currentWeekStartDate = new Date(currentDate);
+        currentWeekStartDate.setDate(currentDate.getDate() - currentDate.getDay()); // Start of the current week (Sunday)
+
         this.state = {
-        selectedCourse: undefined,
-        currentDate: new Date(),
+            selectedCourse: undefined,
+            currentDate,
+            currentWeekStartDate,
         };
         this.handleSelection = this.handleSelection.bind(this);
         this.handlePrevWeek = this.handlePrevWeek.bind(this);
@@ -48,15 +54,17 @@ class CalendarView extends React.Component<
         this.setState({selectedCourse: course});
     }
     handlePrevWeek() {
-        this.setState((prevState) => ({
-            currentDate: new Date(prevState.currentDate.getTime() - 7 * 24 * 60 * 60 * 1000),
-        }));
+        const { currentWeekStartDate } = this.state;
+        const newWeekStartDate = new Date(currentWeekStartDate);
+        newWeekStartDate.setDate(currentWeekStartDate.getDate() - 7); // Go back one week
+        this.setState({ currentWeekStartDate: newWeekStartDate });
     }
 
     handleNextWeek() {
-        this.setState((prevState) => ({
-            currentDate: new Date(prevState.currentDate.getTime() + 7 * 24 * 60 * 60 * 1000),
-        }));
+        const { currentWeekStartDate } = this.state;
+        const newWeekStartDate = new Date(currentWeekStartDate);
+        newWeekStartDate.setDate(currentWeekStartDate.getDate() + 7); // Go forward one week
+        this.setState({ currentWeekStartDate: newWeekStartDate });
     }
 
     onClosedPopup() {
@@ -76,11 +84,19 @@ class CalendarView extends React.Component<
                     <button onClick={this.handleNextWeek}>Next Week</button>
                 </div>
                 <Popup open={this.state.selectedCourse !== undefined} onClose={(e) => this.onClosedPopup()}>
-                    {/* ... (existing code) */}
+                    <ul>
+                        <li>{this.state.selectedCourse?.name ?? "No name"}</li>
+                        <li>{this.state.selectedCourse?.groupId ?? "Not provided"}</li>
+                        <li>De {this.state.selectedCourse?.starttime.getHours() ?? "??"}h{this.state.selectedCourse?.starttime.getMinutes() ?? "??"}</li>
+                        <li>À {this.state.selectedCourse?.endtime.getHours() ?? "??"}h{this.state.selectedCourse?.endtime.getMinutes() ?? "??"}</li>
+                        <li>Local : {this.state.selectedCourse?.local ?? "Not assigned"}</li>
+                        <li>{this.state.selectedCourse?.description ?? "No description provided"}</li>
+                    </ul>
                 </Popup>
                 <CalendarTable
                     data={this.props.courses}
                     selectionHandler={this.handleSelection}
+                    currentWeekStartDate={this.state.currentWeekStartDate} // Pass the current week's start date to CalendarTable
                     startDate={startOfWeek}
                     endDate={endOfWeek}
                 />
