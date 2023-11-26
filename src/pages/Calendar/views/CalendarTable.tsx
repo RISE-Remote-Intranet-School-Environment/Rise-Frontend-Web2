@@ -19,14 +19,12 @@ class CalendarTable extends React.Component<CalendarTableProps<EcamCourse>> {
             {
                 title: 'Timecode',
                 dataIndex: 'timecode',
-                align: 'right',
+                align: 'center',
                 width: 1,
                 render: (num: number) =>
-                    <button
-                        onClick={(e) => undefined}
-                        className={"hour"}>
-                            {num + "h^"}
-                    </button>,
+                    <p className='hour'>
+                        {num+'h'}
+                    </p>
             },
             new DayColumn("Monday", this.props.selectionHandler),
             new DayColumn("Tuesday", this.props.selectionHandler),
@@ -36,20 +34,20 @@ class CalendarTable extends React.Component<CalendarTableProps<EcamCourse>> {
             new DayColumn("Saturday", this.props.selectionHandler),
             new DayColumn("Sunday", this.props.selectionHandler)
         ];
-        
+
         // first line for all-day events
         let data: WeekList[] = [
-            new WeekList("0", 0)
+            new WeekList("0", 7)
         ];
 
         // Retreive all courses with the "props" object, inherited from "React.Component"
         let x = this.props.data;
-        
+
         for (let i = 8; i < 22; i++) {
             const timekey = i.toString() + "h^";
-            
+
             let w: WeekList = new WeekList(timekey, i);
-            
+
             // 1rst filter to take all courses starting at the row's hour
             let c: EcamCourse[] | undefined = x?.filter((course) => course.starttime.getHours() === i);
 
@@ -64,7 +62,7 @@ class CalendarTable extends React.Component<CalendarTableProps<EcamCourse>> {
             w.friday = c?.filter((course) => course.starttime.getDay() === 5) ?? [];
             w.saturday = c?.filter((course) => course.starttime.getDay() === 6) ?? [];
             w.sunday = c?.filter((course) => course.starttime.getDay() === 0) ?? [];
-            
+
             // Push the entry into the table lines' array
             data.push(w);
         }
@@ -75,8 +73,9 @@ class CalendarTable extends React.Component<CalendarTableProps<EcamCourse>> {
                     columns={columns}
                     dataSource={data}
                     pagination={false}
-                    footer={() => 'Footer'}
-                    bordered 
+                    bordered
+
+
                 />
             </Card>
         )

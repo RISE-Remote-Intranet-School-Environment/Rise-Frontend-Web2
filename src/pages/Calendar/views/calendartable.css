@@ -1,9 +1,4 @@
-table {
-    white-space: nowrap;
-    border-collapse: collapse;
-}
-
-.hour {
-    color: blue;
-    border-style: none;
-}
+.ant-table-cell {
+    padding: 0 !important;
+    width: 10vw;
+  }

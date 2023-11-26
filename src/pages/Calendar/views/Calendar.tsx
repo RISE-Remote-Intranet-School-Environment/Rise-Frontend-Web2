@@ -6,10 +6,11 @@ import 'reactjs-popup/dist/index.css';
 
 import EcamCourse from '../models/EcamCourse';
 import CalendarTable from './CalendarTable';
+import './Calendar.css'
 
 /**
  * Used to define which `props` type is used by `CalendarView`
- * 
+ *
  * Props are readonly
  */
 interface CalendarViewProps<T extends EcamCourse> {
@@ -18,7 +19,7 @@ interface CalendarViewProps<T extends EcamCourse> {
 
 /**
  * Used to define the state's variables
- * 
+ *
  * The state can be modified, with the `setState` method which triggers the render
  */
 interface CalendarViewState<T extends EcamCourse> {
@@ -27,7 +28,7 @@ interface CalendarViewState<T extends EcamCourse> {
 
 /**
  * The Calendar class
- * 
+ *
  * The `render` method return a table subdivised in 7 days (see `DayColumn.tsx`), plus 1 column used for each hour
  */
 class CalendarView extends React.Component<
@@ -36,16 +37,16 @@ class CalendarView extends React.Component<
 > {
     constructor(props: CalendarViewProps<EcamCourse>) {
         super(props);
-        this.state = {selectedCourse: undefined};
+        this.state = { selectedCourse: undefined };
         this.handleSelection = this.handleSelection.bind(this);
     }
 
     handleSelection(course: EcamCourse) {
-        this.setState({selectedCourse: course});
+        this.setState({ selectedCourse: course });
     }
 
     onClosedPopup() {
-        this.setState({selectedCourse: undefined});
+        this.setState({ selectedCourse: undefined });
     }
 
     render(): React.ReactNode {
@@ -53,14 +54,42 @@ class CalendarView extends React.Component<
         return (
             <>
                 <Popup open={this.state.selectedCourse !== undefined} onClose={(e) => this.onClosedPopup()}>
-                    <ul>
-                        <li>{this.state.selectedCourse?.name ?? "No name"}</li>
-                        <li>{this.state.selectedCourse?.groupId ?? "Not provided"}</li>
-                        <li>De {this.state.selectedCourse?.starttime.getHours() ?? "??"}h{this.state.selectedCourse?.starttime.getMinutes() ?? "??"}</li>
-                        <li>À {this.state.selectedCourse?.endtime.getHours() ?? "??"}h{this.state.selectedCourse?.endtime.getMinutes() ?? "??"}</li>
-                        <li>Local : {this.state.selectedCourse?.local ?? "Not assigned"}</li>
-                        <li>{this.state.selectedCourse?.description ?? "No description provided"}</li>
-                    </ul>
+                    <div>
+                        <h1>Info</h1>
+                        <table id='popup'>
+                            <tbody>
+                                <tr>
+                                    <td className='ref'>Name of the course</td>
+                                    <td>{this.state.selectedCourse?.name ?? "No name"}</td>
+                                </tr>
+                                <tr>
+                                    <td className='ref'>Professor</td>
+                                    <td>
+                                        {this.state.selectedCourse?.teacherName ?? "/"} <br />
+                                        Mail: {this.state.selectedCourse?.tacherEmail ?? "/"}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className='ref'>Date and Time</td>
+                                    <td>{this.state.selectedCourse?.starttime.toISOString().split('T')[0] ?? "/"} <br />
+                                    {this.state.selectedCourse?.starttime.toLocaleTimeString().substring(0, this.state.selectedCourse?.starttime.toLocaleTimeString().lastIndexOf(':'))}-
+                                    {this.state.selectedCourse?.endtime.toLocaleTimeString().substring(0, this.state.selectedCourse?.endtime.toLocaleTimeString().lastIndexOf(':'))}</td>
+                                </tr>
+                                <tr>
+                                    <td className='ref'>Classroom</td>
+                                    <td>{this.state.selectedCourse?.local ?? "/"}</td>
+                                </tr>
+                                <tr>
+                                    <td className='ref'>Description</td>
+                                    <td>{this.state.selectedCourse?.description ?? "/"}</td>
+                                </tr>
+                                <tr>
+                                    <td className='ref'>Link</td>
+                                    <td><a href={this.state.selectedCourse?.link} title='Link of course'>{this.state.selectedCourse?.link ?? "/"}</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </Popup>
                 <CalendarTable
                     data={this.props.courses}

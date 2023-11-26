@@ -1,17 +1,25 @@
-.timeslot {
+.timeslot{
     display: flex;
-    flex-direction: row;
-    align-content: space-around;
-    height: 72px;
+    height: 100px;
 }
 
-/* Same properties for each course */
-.event {
-    border: 1px solid;
-    border-radius: 4px;
-    padding: 2px;
-    position: absolute;
+.event{
+    position: relative;
 }
+
+.button{
+    opacity: 0.4;
+    height: 100%;
+    width: 100%;
+}
+
+.description{
+    position: relative;
+    top: -30%;
+
+}
+
+
 
 /* List of colors for each branch */
 /* See how we use the last letters to differentiate each */
