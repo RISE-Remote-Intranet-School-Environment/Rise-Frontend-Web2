@@ -1,3 +1,4 @@
+import "../App.css"
 import React, { useState } from 'react';
 import List from './Calendar/components/List';
 import Table from './Calendar/components/Table';
