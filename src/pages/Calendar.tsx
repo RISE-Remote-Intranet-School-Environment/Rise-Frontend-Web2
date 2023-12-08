@@ -132,18 +132,18 @@ function Calendar() {
   return (
     <>
       <div>
-        <label>Seleziona una data:</label>
+        <label>Select a date:</label>
         <input
           type="date"
           value={selectedDate ? format(selectedDate, 'yyyy-MM-dd') : ''}
           onChange={(e) => handleDateChange(new Date(e.target.value))}
         />
 
-        <button onClick={handleIncrementWeek}>Aumenta di una settimana</button>
-        <button onClick={handleDecrementWeek}>Diminuisci di una settimana</button>
+        <button onClick={handleIncrementWeek}>Next week</button>
+        <button onClick={handleDecrementWeek}>Previous week</button>
         <button onClick={handleSwitchViewMode}>{viewMode === 'week' ? 'View Monthly' : 'View Weekly'}</button>
 
-        <p>Data selezionata: {selectedDate ? format(selectedDate, 'dd/MM/yyyy') : 'Nessuna data selezionata'}</p>
+        <p>Selected date: {selectedDate ? format(selectedDate, 'dd/MM/yyyy') : 'Nessuna data selezionata'}</p>
 
         {selectedDate && (
           <>
@@ -156,7 +156,7 @@ function Calendar() {
             )}
             {viewMode === 'month' && (
               <>
-                <p>Altri giorni del mese:</p>
+                <p>Other days of the month:</p>
                 <table style={{ borderCollapse: 'collapse', border: '1px solid black', tableLayout: 'fixed', width: '100%' }}>
                   <thead>
                     <tr>
