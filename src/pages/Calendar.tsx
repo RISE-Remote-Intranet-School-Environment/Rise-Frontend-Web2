@@ -1,5 +1,6 @@
 import React from 'react';
 
+import 'reactjs-popup/dist/index.css';
 import CalendarView from './Calendar/views/Calendar';
 import EcamCourse from './Calendar/models/EcamCourse';
 
@@ -73,6 +74,8 @@ const course6: EcamCourse = {
 }
 export interface ICalendarPageProps{}
 
+export interface ICalendarPageProps{}
+
 const CalendarPage: React.FunctionComponent<ICalendarPageProps> = (props) => {
     return (
         <div>
@@ -81,5 +84,6 @@ const CalendarPage: React.FunctionComponent<ICalendarPageProps> = (props) => {
         </div>
     )
 }
+
 
 export default CalendarPage;
