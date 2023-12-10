@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 
 import EcamCourse from '../models/EcamCourse';
 import './timeslot.css';
@@ -8,6 +8,7 @@ interface TimeSlotProps<T extends EcamCourse> {
     rowIndex: number
     // Function provided by CalendarView, given by the DayColumn render
     clickHandler(course: T): void
+
 }
 
 /**
@@ -21,8 +22,9 @@ class TimeSlot extends React.Component<TimeSlotProps<EcamCourse>> {
     }
 
     render(): React.ReactNode {
+
         return (
-            <div className="timeslot">
+            <div className="timeslot" >
                 {this.props.courses.map((course, index) => {
                     let start_minutes = course.starttime.getMinutes();
                     let end_minutes = course.endtime.getMinutes();
@@ -34,7 +36,6 @@ class TimeSlot extends React.Component<TimeSlotProps<EcamCourse>> {
                     // zIndex is used to place later courses above the previous ones (for example, conflict with courses for different study year)
                     // I defined some background colors in "timeslot.css" to differentiate each study's option, and use the className propertie to choose which take
                     console.log('Courses:', this.props.courses); //diplays courses just to check it works
-
                     return (
                         <div
                             key={index}
@@ -58,5 +59,6 @@ class TimeSlot extends React.Component<TimeSlotProps<EcamCourse>> {
         )
     }
 }
+
 
 export default TimeSlot;

@@ -3,13 +3,19 @@
     flex-direction: row;
     align-content: space-around;
     height: 72px;
+    margin-bottom: 10px; /* Margin between time slots */
 }
 
 /* Same properties for each course */
 .event {
+position: absolute;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    padding: 5px;
+    cursor: pointer;
+    box-sizing: border-box;
 
-
-    position: absolute;
 }
 
 /* List of colors for each branch */
