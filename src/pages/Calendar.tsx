@@ -1,14 +1,9 @@
-<<<<<<< HEAD
-import React from 'react';
-
 import 'reactjs-popup/dist/index.css';
-import CalendarView from './Calendar/views/Calendar';
-=======
+//import CalendarView from './Calendar/views/Calendar';
 import "../App.css"
 import React, { useState } from 'react';
 import List from './Calendar/components/List';
 import Table from './Calendar/components/Table';
->>>>>>> b8a42d1c2332318b0fc8732072cd9f7b13e0fb06
 import EcamCourse from './Calendar/models/EcamCourse';
 import {
   format,
@@ -23,84 +18,17 @@ import {
   endOfMonth,
 } from 'date-fns';
 
-<<<<<<< HEAD
+
 // You can make a list of "EcamCourse" if you want to test the calendar with many courses
 // Be aware to modify './Calendar/views/DayColumn.tsx' with a loop to go through all courses
-const course1: EcamCourse = {
-    id: "1",
-    groupId: "MA1",
-    starttime: new Date(2022, 11, 5, 12, 45, 0, 0),
-    endtime: new Date(2022, 11, 5, 16, 15, 0, 0),
-    local: "2E51",
-    name: "Algo",
-    description: "Ceci est un cours",
-    teacherName: "Teacher",
-    labo: false
-}
-const course2: EcamCourse = {
-    id: "2",
-    groupId: "MA1",
-    starttime: new Date(2022, 11, 5, 8, 0, 0, 0),
-    endtime: new Date(2022, 11, 5, 10, 0, 0, 0),
-    local: "2F51",
-    name: "Progra parallele",
-    description: "Ceci est un labo",
-    teacherName: "Teacher",
-    labo: true
-}
-const course3: EcamCourse = {
-    id: "3",
-    groupId: "MA1",
-    starttime: new Date(2022, 11, 6, 10, 0, 0, 0),
-    endtime: new Date(2022, 11, 6, 11, 0, 0, 0),
-    local: "1G01",
-    name: "DataBase",
-    description: "Ceci est un labo",
-    teacherName: "Teacher",
-    labo: true
-}
-const course4: EcamCourse = {
-    id: "4",
-    groupId: "MA1",
-    starttime: new Date(2022, 11, 8, 10, 0, 0, 0),
-    endtime: new Date(2022, 11, 8, 11, 0, 0, 0),
-    local: "1G01",
-    name: "DataBase",
-    description: "Ceci est un labo",
-    teacherName: "Teacher",
-    labo: true
-}
-const course5: EcamCourse = {
-    id: "5",
-    groupId: "MA1",
-    starttime: new Date(2022, 11, 7, 12, 45, 0, 0),
-    endtime: new Date(2022, 11, 7, 16, 15, 0, 0),
-    local: "2E51",
-    name: "Algo",
-    description: "Ceci est un cours",
-    teacherName: "Teacher",
-    labo: false
-}
-const course6: EcamCourse = {
-    id: "6",
-    groupId: "MA1",
-    starttime: new Date(2022, 11, 9, 8, 0, 0, 0),
-    endtime: new Date(2022, 11, 9, 10, 0, 0, 0),
-    local: "2F51",
-    name: "Progra parallele",
-    description: "Ceci est un labo",
-    teacherName: "Teacher",
-    labo: true
-}
-export interface ICalendarPageProps{}
-=======
+
 function Calendar() {
-  // variabile di stato selectedDate che salva la data selezionata
+  // state variable selectedDate that saves the selected date
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [viewMode, setViewMode] = useState<'week' | 'month'>('week');
->>>>>>> b8a42d1c2332318b0fc8732072cd9f7b13e0fb06
 
-  // esempio di corso
+
+  // course example
   const courses: EcamCourse[] = [
     {
       id: '1',
@@ -123,7 +51,7 @@ function Calendar() {
       local: '2D50',
       name: 'Software Licences',
       link: 'https://www.ecam.be/cursus-informatique/',
-      description: 'Laboratory during the student can implement a website',
+      description: 'Laboratory to improve a website and its architecture',
       teacherName: 'LOUIS Jean-Guillaume',
       tacherEmail: 'crt@ecam.be',
       labo: false,
@@ -131,12 +59,12 @@ function Calendar() {
     // Aggiungi altri eventi lezione se necessario
   ];
 
-  // funzione che si occupa della modifica della data
+  // function that handles date modification
   const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
   };
 
-  // funzione che si occupa dell'incrementazione della data di una settimana con il bottone
+  // function that handles incrementing the date by one week with the button
   const handleIncrementWeek = () => {
     if (selectedDate) {
       const newDate = addDays(selectedDate, 7);
@@ -144,7 +72,7 @@ function Calendar() {
     }
   };
 
-  // funzione che si occupa del decremento della data di una settimana con il bottone
+  // function that handles decrementing the date by one week with the button
   const handleDecrementWeek = () => {
     if (selectedDate) {
       const newDate = subDays(selectedDate, 7);
@@ -158,7 +86,7 @@ function Calendar() {
   };
 
 
-  // funzione che mi permette di ottenere gli altri giorni della settimana rispetto al giorno selezionato
+  // function that allows me to get the other days of the week relative to the selected day
   const getWeekDays = (): Date[] => {
     if (selectedDate) {
       const startOfCurrentWeek = startOfWeek(selectedDate, { weekStartsOn: 1 });
@@ -184,7 +112,7 @@ function Calendar() {
       while (currentDay && currentDay <= endOfMonth) {
         const week = daysOfWeek.map(() => {
           const day = currentDay;
-          currentDay = addDays(currentDay!, 1);  // Ajout du "!" pour indiquer que currentDay n'est pas null
+          currentDay = addDays(currentDay!, 1);  // Adding "!" to indicate that currentDay is not null
           return day;
         });
         monthDays.push(week);
@@ -194,7 +122,7 @@ function Calendar() {
     return monthDays;
   };
 
-  // funzione che mi restituisce le ore lavorative del giorno
+  // function that returns the working hours of the day
   const getWorkHours = (): Date[] => {
     const workHours: Date[] = [];
     if (selectedDate) {
@@ -205,105 +133,174 @@ function Calendar() {
     return workHours;
   };
 
-  const formatDay = (day: Date) => format(day, 'dd/MM/yyyy');
-  
+  const formatDay = (day: Date) => format(day, 'dd-MM-yyyy');
+
+
+
+  const containerStyle = {
+      fontFamily: 'Optima, sans-serif',
+      maxWidth: '100%',
+      margin: '0 auto',
+      padding: '20px',
+
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+      background: '#f7f7f7',
+      display: 'grid',
+      gridTemplateColumns: '1fr',
+      gap: '20px',
+      border: '1px solid white ',
+  };
+  const calendarStyle = {
+
+      fontFamily: 'Optima, sans-serif',
+      maxWidth: '100%',
+      margin: '0 auto',
+      padding: '20px',
+      //border: '1px solid #ccc',
+
+      boxShadow: '0 0 1px rgba(0, 0, 0, 0.1)',
+      backgroundColor: '#f9f9f9',
+      //border: '500px solid blue navy',
+  };
+  const buttonStyle = {
+      padding: '8px 16px',
+      fontSize: '14px',
+      cursor: 'pointer',
+
+      border: 'none',
+      backgroundColor: '#007bff',
+      color: 'white',
+      marginRight: '10px',
+  };
+  const labelStyle = {
+      fontSize: '16px',
+      fontWeight: 'bold',
+  };
+  const headerStyle: React.CSSProperties = {
+      fontFamily: 'Optima, sans-serif',
+      background: '#007bff',
+      color: '#fff',
+      padding: '15px',
+      borderRadius: '5px 5px 0 0',
+      textAlign: 'center',
+      fontSize: '24px',
+  };
+  const contentStyle = {
+      fontFamily: 'Optima, sans-serif',
+      background: '#fff',
+
+      padding: '20px',
+      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+  };
+  const footerStyle: React.CSSProperties = {
+      fontFamily: 'Optima, sans-serif',
+      background: '#007bff',
+      color: '#fff',
+      padding: '15px',
+      borderRadius: '0 0 5px 5px',
+      textAlign: 'center',
+  };
+
 
   return (
-    <>
-      <div>
-        <label>Seleziona una data:</label>
-        <input
-          type="date"
-          value={selectedDate ? format(selectedDate, 'yyyy-MM-dd') : ''}
-          onChange={(e) => handleDateChange(new Date(e.target.value))}
-        />
+     <>
+       <div style={{ ...containerStyle, borderRadius: '5px'}}>
+        <div style={headerStyle}>Calendar</div>
+        <div style={{ ...contentStyle, borderRadius: '5px'}}>
+         <label>Select a date:</label>
+         <input
+           type="date"
+           value={selectedDate ? format(selectedDate, 'yyyy-MM-dd') : ''}
+           onChange={(e) => handleDateChange(new Date(e.target.value))}
+         />
 
-        <button onClick={handleIncrementWeek}>Aumenta di una settimana</button>
-        <button onClick={handleDecrementWeek}>Diminuisci di una settimana</button>
-        <button onClick={handleSwitchViewMode}>{viewMode === 'week' ? 'View Monthly' : 'View Weekly'}</button>
+         <button style={buttonStyle} onClick={handleIncrementWeek}>Next Week</button>
+         <button style={buttonStyle} onClick={handleDecrementWeek}>Previous Week</button>
+         <button style={buttonStyle} onClick={handleSwitchViewMode}>{viewMode === 'week' ? 'View Monthly' : 'View Weekly'}</button>
 
-        <p>Data selezionata: {selectedDate ? format(selectedDate, 'dd/MM/yyyy') : 'Nessuna data selezionata'}</p>
+         <p>Selected date : {selectedDate ? format(selectedDate, 'dd-MM-yyyy') : 'No date selected'}</p>
 
-        {selectedDate && (
-          <>
-            {viewMode === 'week' && (
-              <Table
-                getWeekDays={getWeekDays}
-                getWorkHours={getWorkHours}
-                courses={courses}
-              />
-            )}
-            {viewMode === 'month' && (
-              <>
-                <p>Altri giorni del mese:</p>
-                <table style={{ borderCollapse: 'collapse', border: '1px solid black', tableLayout: 'fixed', width: '100%' }}>
-                  <thead>
-                    <tr>
-                      {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => (
-                        <th key={day} className="headerCell" style={{ border: '1px solid black', padding: '10px' }}>
-                          {day}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {getMonthDays().map((week, weekIndex) => (
-                      <tr key={weekIndex} style={{ border: '1px solid black' }}>
-                        {week.map((day) => (
-                          <td
-                            key={day.getTime()}
-                            className={selectedDate && format(selectedDate, 'yyyy-MM-dd') === format(day, 'yyyy-MM-dd') ? 'selectedDay' : ''}
-                            style={{
-                              border: '1px solid black',
-                            }}
-                          >
-                            {formatDay(day)}
-                            <br />
-                            {courses
-                              .filter(
-                                (course) =>
-                                  format(day, 'yyyy-MM-dd') === format(course.starttime, 'yyyy-MM-dd')
-                                  
-                              )
-                              .map((course) => (
-                                <div key={course.id}>
-                                  <strong>{course.name}</strong>
-                                  <br />
-                                  {`${format(course.starttime, 'HH:mm')} - ${format(course.endtime, 'HH:mm')}`}
-                                  <br />
-                                  {`Teacher: ${course.teacherName}`}
-                                  <br />
-                                  {`Location: ${course.local}`}
-                                </div>
-                              ))}
-                          </td>
-                        ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </>
-            )}
-          </>
-        )}
-        <div>
-<<<<<<< HEAD
-            {/* <p>This is Calendar Page</p> */}
-            <CalendarView courses={[course1,course2,course3,course4,course5,course6]}/>
-=======
-          <List
-            getWeekDays={getWeekDays}
-            courses={courses} />
->>>>>>> b8a42d1c2332318b0fc8732072cd9f7b13e0fb06
-        </div>
-      </div>
-    </>
-  );
-}
+         {selectedDate && (
+           <>
+             {viewMode === 'week' && (
+                <div style={{ borderRadius: '5px', overflow: 'hidden' }}>
 
-<<<<<<< HEAD
+                   <Table
+                     getWeekDays={getWeekDays}
+                     getWorkHours={getWorkHours}
+                     courses={courses}
+                   />
+                </div>
+             )}
+             {viewMode === 'month' && (
+               <>
+                 <p>Days of the month:</p>
+                 <table style={{ borderCollapse: 'collapse', borderRadius: '5px', tableLayout: 'fixed', width: '100%', overflow: 'hidden' }}>
+                   <thead>
+                     <tr>
+                       {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => (
+                         <th key={day} className="headerCell" style={{ border: '3px ridge #007bff',  padding: '15px' }}>
+                           {day}
+                         </th>
+                       ))}
+                     </tr>
+                   </thead>
+                   <tbody>
+                     {getMonthDays().map((week, weekIndex) => (
+                       <tr key={weekIndex} style={{ border: '3px ridge #007bff', borderRadius:'5px' }}>
+                         {week.map((day) => (
+                           <td
+                             key={day.getTime()}
+                             className={selectedDate && format(selectedDate, 'yyyy-MM-dd') === format(day, 'yyyy-MM-dd') ? 'selectedDay' : ''}
+                             style={{
+                               border: '3px ridge #007bff',
+                             }}
+                           >
+                             {formatDay(day)}
+                             <br />
+                             {courses
+                               .filter(
+                                 (course) =>
+                                   format(day, 'yyyy-MM-dd') === format(course.starttime, 'yyyy-MM-dd')
 
-export default CalendarPage;
-=======
-export default Calendar;
->>>>>>> b8a42d1c2332318b0fc8732072cd9f7b13e0fb06
+                               )
+                               .map((course) => (
+                                 <div key={course.id}>
+                                   <strong>{course.name}</strong>
+                                   <br />
+                                   {`${format(course.starttime, 'HH:mm')} - ${format(course.endtime, 'HH:mm')}`}
+                                   <br />
+                                   {`Teacher: ${course.teacherName}`}
+                                   <br />
+                                   {`Location: ${course.local}`}
+                                 </div>
+                               ))}
+                           </td>
+                         ))}
+                       </tr>
+                     ))}
+                   </tbody>
+                 </table>
+               </>
+             )}
+           </>
+         )}
+         <div>
+
+
+           <List
+             getWeekDays={getWeekDays}
+             courses={courses} />
+
+         </div>
+         </div>
+         <div style={footerStyle}>
+                 © 2023 Your Calendar App. All rights reserved.
+         </div>
+       </div>
+     </>
+   );
+ }
+
+ //export default CalendarPage;
+ export default Calendar;

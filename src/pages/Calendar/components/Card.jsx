@@ -5,7 +5,7 @@ function Card({ name, starttime, endtime, teacherName, local}) {
             <p>
                 <strong>{name}</strong>
                 <br />
-                {`${format(starttime, 'dd/MM/yyyy')}`}
+                {`${format(starttime, 'dd-MM-yyyy')}`}
                 <br />
                 {`${format(starttime, 'HH:mm')} - ${format(endtime, 'HH:mm')}`}
                 <br />

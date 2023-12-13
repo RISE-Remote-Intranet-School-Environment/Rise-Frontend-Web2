@@ -4,7 +4,7 @@ function List({getWeekDays, courses}) {
     return (
         <div>
             {getWeekDays().map((day) => (
-                <div key={`${format(day, 'yyyy/MM/dd')}`}>
+                <div key={`${format(day, 'yyyy-MM-dd')}`}>
                     {courses
                         .filter(
                             (course) =>
