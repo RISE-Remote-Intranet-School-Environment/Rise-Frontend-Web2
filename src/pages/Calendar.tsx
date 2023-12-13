@@ -126,7 +126,7 @@ function Calendar() {
     return workHours;
   };
 
-  const formatDay = (day: Date) => format(day, 'dd/MM/yyyy');
+  const formatDay = (day: Date) => format(day, 'dd/MM');
   
 
   return (
@@ -157,11 +157,11 @@ function Calendar() {
             {viewMode === 'month' && (
               <>
                 <p>Other days of the month:</p>
-                <table style={{ borderCollapse: 'collapse', border: '1px solid black', tableLayout: 'fixed', width: '100%' }}>
+                <table style={{ borderCollapse: 'collapse', border: '1px solid black', tableLayout: 'fixed', width: '80%' }}>
                   <thead>
                     <tr>
                       {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => (
-                        <th key={day} className="headerCell" style={{ border: '1px solid black', padding: '10px' }}>
+                        <th key={day} className="headerCell" style={{ border: '1px solid black', padding: '10px'}}>
                           {day}
                         </th>
                       ))}
@@ -169,16 +169,20 @@ function Calendar() {
                   </thead>
                   <tbody>
                     {getMonthDays().map((week, weekIndex) => (
-                      <tr key={weekIndex} style={{ border: '1px solid black' }}>
+                      <tr key={weekIndex} style={{ border: '1px solid black', height :'250px' }}>
                         {week.map((day) => (
                           <td
                             key={day.getTime()}
-                            className={selectedDate && format(selectedDate, 'yyyy-MM-dd') === format(day, 'yyyy-MM-dd') ? 'selectedDay' : ''}
+                            className={`${
+                              selectedDate && format(selectedDate, 'yyyy-MM-dd') === format(day, 'yyyy-MM-dd') ? 'selectedDay' : ''
+                            } ${format(day, 'MM') !== format(selectedDate, 'MM') ? 'otherMonthDay' : ''}`}
                             style={{
                               border: '1px solid black',
+                              height: '50px',
+                              textAlign: 'center',  // Centrer le texte
                             }}
                           >
-                            {formatDay(day)}
+                            <div>{formatDay(day)}</div>
                             <br />
                             {courses
                               .filter(
