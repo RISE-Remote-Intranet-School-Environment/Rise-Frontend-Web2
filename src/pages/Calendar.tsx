@@ -1,4 +1,4 @@
-import 'reactjs-popup/dist/index.css';
+import 'reactjs-popup/dist/index.css'; // Import CSS for pop-up
 //import CalendarView from './Calendar/views/Calendar';
 import "../App.css"
 import React, { useState } from 'react';
@@ -6,6 +6,7 @@ import List from './Calendar/components/List';
 import Table from './Calendar/components/Table';
 import EcamCourse from './Calendar/models/EcamCourse';
 import {
+// Import date-fns functions for date manipulation
   format,
   addDays,
   subDays,
@@ -30,7 +31,7 @@ function Calendar() {
 
   // course example
   const courses: EcamCourse[] = [
-    {
+    {// Array of course objects
       id: '1',
       groupId: '4MIN',
       starttime: new Date(2023, 11, 27, 11, 0),
@@ -80,13 +81,13 @@ function Calendar() {
     }
   };
 
-
+// Function to switch between week and month view modes
   const handleSwitchViewMode = () => {
     setViewMode((prevMode) => (prevMode === 'week' ? 'month' : 'week'));
   };
 
 
-  // function that allows me to get the other days of the week relative to the selected day
+  // Function to retrieve days of the week relative to the selected date
   const getWeekDays = (): Date[] => {
     if (selectedDate) {
       const startOfCurrentWeek = startOfWeek(selectedDate, { weekStartsOn: 1 });
@@ -96,8 +97,8 @@ function Calendar() {
     }
     return [];
   };
-
-  const getMonthDays = (): Date[][] => {
+// Function to retrieve days of the month
+const getMonthDays = (): Date[][] => {
     const monthDays: Date[][] = [];
     const daysOfWeek = getWeekDays();
 
@@ -219,7 +220,7 @@ function Calendar() {
          <button style={buttonStyle} onClick={handleSwitchViewMode}>{viewMode === 'week' ? 'View Monthly' : 'View Weekly'}</button>
 
          <p>Selected date : {selectedDate ? format(selectedDate, 'dd-MM-yyyy') : 'No date selected'}</p>
-
+{/* Display weekly or monthly view based on the selected mode */}
          {selectedDate && (
            <>
              {viewMode === 'week' && (
