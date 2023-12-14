@@ -83,6 +83,20 @@ function Calendar() {
         }
     };
 
+    const handleIncrementMonth = () => {
+      if (selectedDate) {
+          const newDate = addDays(selectedDate, 30); // Ajout d'un mois (approximatif, peut être ajusté selon les besoins)
+          setSelectedDate(newDate);
+      }
+  };
+
+  const handleDecrementMonth = () => {
+    if (selectedDate) {
+        const newDate = subDays(selectedDate, 30); 
+        setSelectedDate(newDate);
+    }
+};
+
     const handleSwitchViewMode = () => {
         setViewMode((prevMode) => (prevMode === 'week' ? 'month' : 'week'));
     };
@@ -133,6 +147,10 @@ function Calendar() {
         return workHours;
     };
 
+    const getSelectedMonthLabel = (): string => {
+      return selectedDate ? format(selectedDate, 'MMMM yyyy') : '';
+  };
+
     return (
         <>
             <Popup open={selectedCourse !== null} onClose={handleClosedPopup}>
@@ -146,19 +164,23 @@ function Calendar() {
                 </div>
             </Popup>
             <div>
-                <label>Seleziona una data:</label>
+                <label>Select a date:</label>
                 <input
                     type="date"
                     value={selectedDate ? format(selectedDate, 'yyyy-MM-dd') : ''}
                     onChange={(e) => handleDateChange(new Date(e.target.value))}
                 />
 
-                <p>Data selezionata: {selectedDate ? format(selectedDate, 'dd/MM/yyyy') : 'Nessuna data selezionata'}</p>
-
-                <button onClick={handleIncrementWeek}>Aumenta di una settimana</button>
-                <button onClick={handleDecrementWeek}>Diminuisci di una settimana</button>
+                <p>Selected date: {selectedDate ? format(selectedDate, 'dd/MM/yyyy') : 'Nessuna data selezionata'}</p>
+                <p>Selected month: {getSelectedMonthLabel()}</p>
+                
                 <button onClick={handleSwitchViewMode}>{viewMode === 'week' ? 'View Monthly' : 'View Weekly'}</button>
-
+                <button onClick={viewMode === 'week' ? handleIncrementWeek : handleIncrementMonth}>
+    {viewMode === 'week' ? 'Add a week' : 'Add a month'}
+</button>
+<button onClick={viewMode === 'week' ? handleDecrementWeek : handleDecrementMonth}>
+    {viewMode === 'week' ? 'Sub a week' : 'Sub a mounth'}
+</button>
 
                 {selectedDate && (
                     <>

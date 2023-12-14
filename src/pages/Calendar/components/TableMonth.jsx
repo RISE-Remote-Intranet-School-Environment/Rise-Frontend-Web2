@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import "../../../App.css";
 
 function TableMouth({ getMonthDays, courses, selectedDate }) {
     return (
@@ -19,12 +20,16 @@ function TableMouth({ getMonthDays, courses, selectedDate }) {
                             {week.map((day) => (
                                 <td
                                     key={day.getTime()}
-                                    className={selectedDate && format(selectedDate, 'yyyy-MM-dd') === format(day, 'yyyy-MM-dd') ? 'selectedDay' : ''}
+                                    className={`${
+                                        selectedDate && format(selectedDate, 'yyyy-MM-dd') === format(day, 'yyyy-MM-dd') ? 'selectedDay' : ''
+                                      } ${format(day, 'MM') !== format(selectedDate, 'MM') ? 'otherMonthDay' : ''}`}
                                     style={{
                                         border: '1px solid black',
+                                        height: '50px',
+                                        textAlign: 'center',
                                     }}
                                 >
-                                    {format(day, 'dd/MM/yyyy')}
+                                    {format(day, 'dd')}
                                     <br />
                                     {courses
                                         .filter(
