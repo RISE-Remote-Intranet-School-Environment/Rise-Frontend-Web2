@@ -1,39 +1,36 @@
-import React from 'react';
 import { format } from 'date-fns';
 
-function Table({ getWeekDays, getWorkHours, courses }) {
-    const formatDay = (day) => format(day, 'dd/MM/yyyy');
-    const formatHour = (hour) => format(hour, 'HH:mm');
-
+function TableMouth({ getMonthDays, courses, selectedDate }) {
     return (
-        <div>
-            <table style={{ borderCollapse: 'collapse', border: '1px solid black' }}>
+        <>
+            <table style={{ borderCollapse: 'collapse', border: '1px solid black', tableLayout: 'fixed', width: '100%' }}>
                 <thead>
                     <tr>
-                        <th style={{ border: '1px solid black' }}></th>
-                        {getWeekDays().map((day) => (
-                            <th key={day.getTime()} style={{ border: '1px solid black' }}>
-                                {`${format(day, 'eeee')}: ${formatDay(day)} `}
+                        {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => (
+                            <th key={day} className="headerCell" style={{ border: '1px solid black', padding: '10px' }}>
+                                {day}
                             </th>
                         ))}
                     </tr>
                 </thead>
                 <tbody>
-                    {getWorkHours().map((hour) => (
-                        <tr key={hour.getTime()} style={{ border: '1px solid black' }}>
-                            <td style={{ border: '1px solid black' }}>{formatHour(hour)}</td>
-                            {getWeekDays().map((day) => (
+                    {getMonthDays().map((week, weekIndex) => (
+                        <tr key={weekIndex} style={{ border: '1px solid black' }}>
+                            {week.map((day) => (
                                 <td
-                                    key={`${hour.getTime()}-${day.getTime()}`}
+                                    key={day.getTime()}
+                                    className={selectedDate && format(selectedDate, 'yyyy-MM-dd') === format(day, 'yyyy-MM-dd') ? 'selectedDay' : ''}
                                     style={{
                                         border: '1px solid black',
                                     }}
                                 >
+                                    {format(day, 'dd/MM/yyyy')}
+                                    <br />
                                     {courses
                                         .filter(
                                             (course) =>
-                                                format(day, 'yyyy-MM-dd') === format(course.starttime, 'yyyy-MM-dd') &&
-                                                hour.getHours() === course.starttime.getHours()
+                                                format(day, 'yyyy-MM-dd') === format(course.starttime, 'yyyy-MM-dd')
+
                                         )
                                         .map((course) => (
                                             <div key={course.id}>
@@ -52,8 +49,8 @@ function Table({ getWeekDays, getWorkHours, courses }) {
                     ))}
                 </tbody>
             </table>
-        </div>
+        </>
     );
 }
 
-export default Table;
+export default TableMouth;
