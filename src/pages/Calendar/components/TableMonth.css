@@ -1,0 +1,14 @@
+.headerCell {
+    background-color: rgb(173, 184, 230); /* Changez cette couleur selon vos préférences */
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .selectedDay {
+    background-color: rgb(153, 144, 215); /* Couleur de surbrillance pour la case sélectionnée */
+  }
+  
+  /* Ajoutez cette règle pour définir la couleur d'arrière-plan pour les jours d'autres mois */
+  .otherMonthDay {
+    background-color: #f0f0f0; /* Couleur d'arrière-plan pour les jours d'autres mois */
+  }

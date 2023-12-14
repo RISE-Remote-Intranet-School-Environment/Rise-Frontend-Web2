@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import "../../../App.css";
+import "./TableMonth.css";
 
 function TableMouth({ getMonthDays, courses, selectedDate }) {
     return (
