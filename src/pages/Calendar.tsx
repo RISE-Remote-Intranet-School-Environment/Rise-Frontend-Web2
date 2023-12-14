@@ -4,6 +4,8 @@ import TableWeek from './Calendar/components/TableWeek';
 import TableMouth from './Calendar/components/TableMonth';
 import EcamCourse from './Calendar/models/EcamCourse';
 import PopupWindow from './Calendar/components/PopupWindow';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 import {
     format,
@@ -16,9 +18,6 @@ import {
     addHours,
 } from 'date-fns';
 
-import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
-
 function Calendar() {
     // variabile di stato selectedDate che salva la data selezionata
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -29,32 +28,135 @@ function Calendar() {
     const courses: EcamCourse[] = [
         {
             id: '1',
-            groupId: '4MIN',
-            starttime: new Date(2023, 11, 27, 12, 0),
-            endtime: new Date(2023, 11, 27, 16, 0),
-            local: '2D50',
-            name: 'Software Architecture and Quality Lab',
+            groupId: '5MIN',
+            starttime: new Date(2023, 10, 13, 12, 45),
+            endtime: new Date(2023, 10, 13, 16, 0),
+            local: '2F10',
+            name: 'Software Licences and GDPR',
             link: 'https://www.ecam.be/cursus-informatique/',
-            description: 'Laboratory during the student can implement a website',
-            teacherName: 'LOUIS Jean-Guillaume',
-            tacherEmail: 'crt@ecam.be',
+            description: 'Lesson about GDPR',
+            teacherName: 'Villano Emilio',
+            tacherEmail: 'villano.emilio@ecam.be',
             labo: false,
         },
         {
             id: '2',
-            groupId: '4MIN',
-            starttime: new Date(2023, 11, 29, 16, 0),
-            endtime: new Date(2023, 11, 29, 17, 0),
-            local: '2D50',
-            name: 'Software Licences',
+            groupId: '5MIN',
+            starttime: new Date(2023, 10, 15, 12, 45),
+            endtime: new Date(2023, 10, 15, 16, 15),
+            local: '1E04',
+            name: 'Artificial Intelligence project',
             link: 'https://www.ecam.be/cursus-informatique/',
-            description: 'Laboratory during the student can implement a website',
-            teacherName: 'LOUIS Jean-Guillaume',
-            tacherEmail: 'crt@ecam.be',
+            description: 'Laboratory during the student can implement a AI project',
+            teacherName: 'Hasselmann Ken',
+            tacherEmail: 'Hasselmann.ken@ecam.be',
+            labo: true,
+        },
+        {
+            id: '3',
+            groupId: '4MCO',
+            starttime: new Date(2023, 10, 16, 8, 30),
+            endtime: new Date(2023, 10, 16, 12, 0),
+            local: '2D15',
+            name: 'Ethic Lab',
+            link: 'https://www.ecam.be/cursus-informatique/',
+            description: 'Lesson about ethical decision',
+            teacherName: 'Ngom Gaël',
+            tacherEmail: 'Ngom.gaël@ecam.be',
             labo: false,
         },
-
-        // Aggiungi altri eventi lezione se necessario
+        {
+            id: '4',
+            groupId: '4MIN',
+            starttime: new Date(2023, 10, 17, 12, 45),
+            endtime: new Date(2023, 10, 17, 16, 15),
+            local: '2D50',
+            name: 'Software Architecture and Quality Lab',
+            link: 'https://www.ecam.be/cursus-informatique/',
+            description: 'Laboratory during the student can implement a website',
+            teacherName: 'Louis Jean-Guillaume',
+            tacherEmail: 'Louis-jean-guillaume@ecam.be',
+            labo: true,
+        },
+        {
+            id: '5',
+            groupId: '4MEM',
+            starttime: new Date(2023, 10, 21, 8, 30),
+            endtime: new Date(2023, 10, 21, 12, 0),
+            local: '2E44',
+            name: 'Sciences humaines',
+            link: 'https://www.ecam.be/cursus-informatique/',
+            description: 'Lesson',
+            teacherName: 'Melotte Philippe',
+            tacherEmail: 'Melotte.philippe@ecam.be',
+            labo: false,
+        },
+        {
+            id: '6',
+            groupId: '4MAU',
+            starttime: new Date(2023, 10, 22, 8, 30),
+            endtime: new Date(2023, 10, 22, 12, 0),
+            local: '2E14',
+            name: 'Ethic Lab',
+            link: 'https://www.ecam.be/cursus-informatique/',
+            description: 'Lesson about ethical decision',
+            teacherName: 'Ngom Gaël',
+            tacherEmail: 'Ngom.gaël@ecam.be',
+            labo: false,
+        },
+        {
+            id: '7',
+            groupId: '5MIN',
+            starttime: new Date(2023, 10, 22, 12, 45),
+            endtime: new Date(2023, 10, 22, 16, 15),
+            local: '1E04',
+            name: 'Artificial Intelligence project',
+            link: 'https://www.ecam.be/cursus-informatique/',
+            description: 'Laboratory during the student can implement a AI project',
+            teacherName: 'Hasselmann Ken',
+            tacherEmail: 'Hasselmann.ken@ecam.be',
+            labo: true,
+        },
+        {
+            id: '8',
+            groupId: '4MIN',
+            starttime: new Date(2023, 10, 24, 8, 30),
+            endtime: new Date(2023, 10, 24, 11, 45),
+            local: '2F50',
+            name: 'Software Licences',
+            link: 'https://www.ecam.be/cursus-informatique/',
+            description: 'Lesson about Software Architecture',
+            teacherName: 'Louis Jean-Guillaume',
+            tacherEmail: 'Louis-jean-guillaume@ecam.be',
+            labo: false,
+        },
+        {
+            id: '9',
+            groupId: '4MIN',
+            starttime: new Date(2023, 10, 24, 12, 45),
+            endtime: new Date(2023, 10, 24, 16, 15),
+            local: '1E04',
+            name: 'Software Architecture and Quality Lab',
+            link: 'https://www.ecam.be/cursus-informatique/',
+            description: 'Laboratory during the student can implement a website',
+            teacherName: 'Louis Jean-Guillaume',
+            tacherEmail: 'Louis-jean-guillaume@ecam.be',
+            labo: true,
+        },
+        {
+            id: '10',
+            groupId: '4MIN',
+            starttime: new Date(2023, 11, 1, 12, 45),
+            endtime: new Date(2023, 11, 1, 16, 15),
+            local: '1E04',
+            name: 'Software Architecture and Quality Lab',
+            link: 'https://www.ecam.be/cursus-informatique/',
+            description: 'Laboratory during the student can implement a website',
+            teacherName: 'Louis Jean-Guillaume',
+            tacherEmail: 'Louis-jean-guillaume@ecam.be',
+            labo: true,
+        },
+             
     ];
 
     const handleDateChange = (date: Date | null) => {
@@ -126,7 +228,7 @@ function Calendar() {
     const getWorkHours = (): Date[] => {
         const workHours: Date[] = [];
         if (selectedDate) {
-            for (let i = 8; i <= 19; i++) {
+            for (let i = 7; i <= 19; i++) {
                 workHours.push(addHours(selectedDate, i));
             }
         }
