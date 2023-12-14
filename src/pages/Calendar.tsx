@@ -299,6 +299,7 @@ function Calendar() {
                                 getMonthDays={getMonthDays}
                                 courses={courses}
                                 selectedDate={selectedDate}
+                                selectionHandler={handleSelection}
                             />
                         )}
                     </>
