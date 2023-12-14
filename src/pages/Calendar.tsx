@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Import CSS for pop-up
 import List from './Calendar/components/List';
 import TableWeek from './Calendar/components/TableWeek';
-import TableMouth from './Calendar/components/TableMonth';
+import TableMonth from './Calendar/components/TableMonth';
 import EcamCourse from './Calendar/models/EcamCourse';
 import PopupWindow from './Calendar/components/PopupWindow';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-
+// Import date-fns functions for date manipulation
 import {
     format,
     addDays,
@@ -14,17 +14,27 @@ import {
     startOfWeek,
     endOfWeek,
     eachDayOfInterval,
-    isWithinInterval,
     addHours,
 } from 'date-fns';
 
 function Calendar() {
-    // variabile di stato selectedDate che salva la data selezionata
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [selectedCourse, setSelectedCourse] = useState<EcamCourse | null>(null);
     const [viewMode, setViewMode] = useState<'week' | 'month'>('week');
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-    // esempio di corso
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     const courses: EcamCourse[] = [
         {
             id: '1',
@@ -156,9 +166,8 @@ function Calendar() {
             tacherEmail: 'Louis-jean-guillaume@ecam.be',
             labo: true,
         },
-             
     ];
-
+    // Function that handles date modification
     const handleDateChange = (date: Date | null) => {
         setSelectedDate(date);
     };
@@ -170,40 +179,39 @@ function Calendar() {
     const handleClosedPopup = () => {
         setSelectedCourse(null);
     };
-
+    // Function that handles incrementing the date by one week with the button
     const handleIncrementWeek = () => {
         if (selectedDate) {
             const newDate = addDays(selectedDate, 7);
             setSelectedDate(newDate);
         }
     };
-
+    // Function that handles decrementing the date by one week with the button
     const handleDecrementWeek = () => {
         if (selectedDate) {
             const newDate = subDays(selectedDate, 7);
             setSelectedDate(newDate);
         }
     };
-
     const handleIncrementMonth = () => {
-      if (selectedDate) {
-          const newDate = addDays(selectedDate, 30); // Ajout d'un mois (approximatif, peut être ajusté selon les besoins)
-          setSelectedDate(newDate);
-      }
-  };
+        if (selectedDate) {
+            const newDate = addDays(selectedDate, 30);
+            setSelectedDate(newDate);
+        }
+    };
 
-  const handleDecrementMonth = () => {
-    if (selectedDate) {
-        const newDate = subDays(selectedDate, 30); 
-        setSelectedDate(newDate);
-    }
-};
+    const handleDecrementMonth = () => {
+        if (selectedDate) {
+            const newDate = subDays(selectedDate, 30);
+            setSelectedDate(newDate);
+        }
+    };
 
+    // Function to switch between week and month view modes
     const handleSwitchViewMode = () => {
         setViewMode((prevMode) => (prevMode === 'week' ? 'month' : 'week'));
     };
-
-
+    // Function to retrieve days of the week relative to the selected date
     const getWeekDays = (): Date[] => {
         if (selectedDate) {
             const startOfCurrentWeek = startOfWeek(selectedDate, { weekStartsOn: 1 });
@@ -213,7 +221,7 @@ function Calendar() {
         }
         return [];
     };
-
+    // Function to retrieve days of the month
     const getMonthDays = (): Date[][] => {
         const monthDays: Date[][] = [];
         const daysOfWeek = getWeekDays();
@@ -229,7 +237,7 @@ function Calendar() {
             while (currentDay && currentDay <= endOfMonth) {
                 const week = daysOfWeek.map(() => {
                     const day = currentDay;
-                    currentDay = addDays(currentDay!, 1);  // Ajout du "!" pour indiquer que currentDay n'est pas null
+                    currentDay = addDays(currentDay!, 1);
                     return day;
                 });
                 monthDays.push(week);
@@ -238,7 +246,7 @@ function Calendar() {
 
         return monthDays;
     };
-
+    // Function that returns the working hours of the day
     const getWorkHours = (): Date[] => {
         const workHours: Date[] = [];
         if (selectedDate) {
@@ -248,45 +256,106 @@ function Calendar() {
         }
         return workHours;
     };
-
     const getSelectedMonthLabel = (): string => {
-      return selectedDate ? format(selectedDate, 'MMMM yyyy') : '';
-  };
+        return selectedDate ? format(selectedDate, 'MMMM yyyy') : '';
+    };
 
-    return (
+    const containerStyle = {
+        fontFamily: 'Optima, sans-serif',
+        maxWidth: '100%',
+        margin: '0 auto',
+        padding: '20px',
+
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        background: '#f7f7f7',
+        display: 'grid',
+        gridTemplateColumns: '1fr',
+        gap: '20px',
+        border: '1px solid white ',
+    };
+    const calendarStyle = {
+
+        fontFamily: 'Optima, sans-serif',
+        maxWidth: '100%',
+        margin: '0 auto',
+        padding: '20px',
+        //border: '1px solid #ccc',
+
+        boxShadow: '0 0 1px rgba(0, 0, 0, 0.1)',
+        backgroundColor: '#f9f9f9',
+        //border: '500px solid blue navy',
+    };
+    const buttonStyle = {
+        padding: '8px 16px',
+        fontSize: '14px',
+        cursor: 'pointer',
+
+        border: 'none',
+        backgroundColor: '#007bff',
+        color: 'white',
+        marginRight: '10px',
+    };
+    const headerStyle: React.CSSProperties = {
+        fontFamily: 'Optima, sans-serif',
+        background: '#007bff',
+        color: '#fff',
+        padding: '15px',
+        borderRadius: '5px 5px 0 0',
+        textAlign: 'center',
+        fontSize: '24px',
+    };
+    const contentStyle = {
+        fontFamily: 'Optima, sans-serif',
+        background: '#fff',
+
+        padding: '20px',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    };
+    const footerStyle: React.CSSProperties = {
+        fontFamily: 'Optima, sans-serif',
+        background: '#007bff',
+        color: '#fff',
+        padding: '15px',
+        borderRadius: '0 0 5px 5px',
+        textAlign: 'center',
+    }
+
+        return (
         <>
             <Popup open={selectedCourse !== null} onClose={handleClosedPopup}>
                 <div>
                     {selectedCourse && (
-                        <>
-                            <PopupWindow
-                                course={selectedCourse} />
-                        </>
+                        <PopupWindow course={selectedCourse} />
                     )}
                 </div>
             </Popup>
-            <div>
-                <label>Select a date:</label>
-                <input
-                    type="date"
-                    value={selectedDate ? format(selectedDate, 'yyyy-MM-dd') : ''}
-                    onChange={(e) => handleDateChange(new Date(e.target.value))}
-                />
 
-                <p>Selected date: {selectedDate ? format(selectedDate, 'dd/MM/yyyy') : 'Nessuna data selezionata'}</p>
-                <p>Selected month: {getSelectedMonthLabel()}</p>
-                
-                <button onClick={handleSwitchViewMode}>{viewMode === 'week' ? 'View Monthly' : 'View Weekly'}</button>
-                <button onClick={viewMode === 'week' ? handleIncrementWeek : handleIncrementMonth}>
-    {viewMode === 'week' ? 'Add a week' : 'Add a month'}
-</button>
-<button onClick={viewMode === 'week' ? handleDecrementWeek : handleDecrementMonth}>
-    {viewMode === 'week' ? 'Sub a week' : 'Sub a mounth'}
-</button>
+            <div style={{ ...containerStyle, borderRadius: '5px' }}>
+                <div style={headerStyle}>Calendar</div>
+                <div style={{ ...contentStyle, borderRadius: '5px' }}>
+                    <label>Select a date:</label>
+                    <input
+                        type="date"
+                        value={selectedDate ? format(selectedDate, 'yyyy-MM-dd') : ''}
+                        onChange={(e) => handleDateChange(new Date(e.target.value))}
+                    />
 
-                {selectedDate && (
-                    <>
-                        {viewMode === 'week' && (
+                    <p>Selected date: {selectedDate ? format(selectedDate, 'dd/MM/yyyy') : 'No date selected'}</p>
+                    <p>Selected month: {getSelectedMonthLabel()}</p>
+
+                    <button style={buttonStyle} onClick={viewMode === 'week' ? handleIncrementWeek : handleIncrementMonth}>
+                        {viewMode === 'week' ? 'Next week' : 'Next month'}
+                    </button>
+                    <button style={buttonStyle} onClick={viewMode === 'week' ? handleDecrementWeek : handleDecrementMonth}>
+                        {viewMode === 'week' ? 'Previous week' : 'Previous mounth'}
+                    </button>
+                    <button style={buttonStyle} onClick={handleSwitchViewMode}>{viewMode === 'week' ? 'View Monthly' : 'View Weekly'}</button>
+                </div>
+
+                {windowWidth > 700 && (
+                    <div className="table-container">
+                        {selectedDate && viewMode === 'week' && (
+
                             <TableWeek
                                 getWeekDays={getWeekDays}
                                 getWorkHours={getWorkHours}
@@ -294,21 +363,25 @@ function Calendar() {
                                 selectionHandler={handleSelection}
                             />
                         )}
-                        {viewMode === 'month' && (
-                            <TableMouth
+                        {selectedDate && viewMode === 'month' && (
+                            <TableMonth
                                 getMonthDays={getMonthDays}
                                 courses={courses}
                                 selectedDate={selectedDate}
                                 selectionHandler={handleSelection}
                             />
                         )}
-                    </>
+                    </div>
+                )}
+
+                {windowWidth <= 700 && (
+                    <div>
+                        <List getWeekDays={getWeekDays} courses={courses} />
+                    </div>
                 )}
             </div>
-            <div>
-                <List
-                    getWeekDays={getWeekDays}
-                    courses={courses} />
+            <div style={footerStyle}>
+                © 2023 Your Calendar App. All rights reserved.
             </div>
         </>
     );
