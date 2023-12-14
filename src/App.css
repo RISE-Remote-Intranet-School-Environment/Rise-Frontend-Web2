@@ -28,15 +28,6 @@
   color: #61dafb;
 }
 
-.headerCell {
-  background-color: lightblue; /* Changez cette couleur selon vos préférences */
-  font-weight: bold;
-  text-align: center;
-}
-
-.selectedDayCell {
-  background-color: lightcoral; /* Changez cette couleur selon vos préférences */
-}
 
 @keyframes App-logo-spin {
   from {
