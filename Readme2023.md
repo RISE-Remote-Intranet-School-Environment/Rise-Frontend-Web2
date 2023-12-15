@@ -140,3 +140,7 @@ ____
 ## Card.jsx
 In this file, we find the definition of the Card element. The attributes displayed on the screen for each course are then specified.
 handleClick: Handles the selection of a course/event when clicked.
+
+# Possible future improvements:
+* Connect both the frontend and backend to display the courses directly from database
+* Add a Year view to filter courses by year
