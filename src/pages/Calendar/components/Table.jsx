@@ -12,14 +12,14 @@ function Table({ getWeekDays, getWorkHours, courses }) {
     
     // Define styles for the background of days of the week
     const dayOfWeekBackground = {
-        backgroundColor: 'LavenderBlush', // Background color
-        border: '3px ridge #007bff', // Border style
+        backgroundColor: 'Lavender', // Background color
+        border: '3px ridge Black', // Border style
     };
 
     // Return JSX that represents a table with rows and columns for scheduling courses
     return (
         <div style={{ borderRadius: '5px', overflow: 'hidden' }}>
-            <div style={{ border: '1px dotted #007bff', borderRadius: '5px' }}>
+            <div style={{ border: '1px dotted Black', borderRadius: '5px' }}>
                 <table
                     style={{
                         borderCollapse: 'collapse',
@@ -36,7 +36,7 @@ function Table({ getWeekDays, getWorkHours, courses }) {
                             {getWeekDays().map((day) => (
                                 <th
                                     key={day.getTime()}
-                                    style={{ border: '3px ridge #007bff', padding: '15px', ...dayOfWeekBackground }}
+                                    style={{ border: '3px ridge #000000', padding: '15px', ...dayOfWeekBackground }}
                                 >
                                     {/* Display the full day name and date */}
                                     {`${format(day, 'eeee')} ${formatDay(day)} `}
@@ -47,15 +47,15 @@ function Table({ getWeekDays, getWorkHours, courses }) {
                     <tbody>
                         {/* Loop through each hour of the work schedule */}
                         {getWorkHours().map((hour) => (
-                            <tr key={hour.getTime()} style={{ border: '3px ridge #007bff' }}>
+                            <tr key={hour.getTime()} style={{ border: '3px ridge #000000' }}>
                                 {/* Column for displaying hours */}
-                                <td style={{ border: '3px ridge #007bff' }}>{formatHour(hour)}</td>
+                                <td style={{ border: '3px ridge #000000' }}>{formatHour(hour)}</td>
                                 {/* Loop through each day to display scheduled courses */}
                                 {getWeekDays().map((day) => (
                                     <td
                                         key={`${hour.getTime()}-${day.getTime()}`}
                                         style={{
-                                            border: '3px ridge #007bff',
+                                            border: '3px ridge #000000',
                                         }}
                                     >
                                         {/* Display courses scheduled for the specific hour and day */}

@@ -2,8 +2,7 @@
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-
-    
+    border: #000000
     td {
         height: 72px;
         border: 0px;
@@ -24,4 +23,5 @@
     position: relative;
     width: 100%;
     height: 72px;
+    border: #000000
   }

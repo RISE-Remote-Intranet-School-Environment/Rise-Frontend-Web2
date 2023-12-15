@@ -7,7 +7,7 @@ function PopupWindow ({course}) {
             <table id='popup'>
                 <tbody>
                     <tr>
-                        <td className='ref'>Name of the course</td>
+                        <td className='ref'>Course</td>
                         <td>{course?.name ?? "No name"}</td>
                     </tr>
                     <tr>
@@ -18,7 +18,7 @@ function PopupWindow ({course}) {
                         </td>
                     </tr>
                     <tr>
-                        <td className='ref'>Date and Time</td>
+                        <td className='ref'>Schedule</td>
                         <td>{course?.starttime.toISOString().split('T')[0] ?? "/"} <br />
                             {course?.starttime.toLocaleTimeString().substring(0, course?.starttime.toLocaleTimeString().lastIndexOf(':'))}-
                             {course?.endtime.toLocaleTimeString().substring(0, course?.endtime.toLocaleTimeString().lastIndexOf(':'))}</td>
