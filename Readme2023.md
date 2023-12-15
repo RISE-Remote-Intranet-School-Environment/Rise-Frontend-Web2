@@ -236,6 +236,7 @@ ______
 * Connect both the frontend and backend to display the courses directly from database
 * Add a Year view to filter courses by year
 * Possibility to add a course to an empty cell
+* How to refresh the page automatically when then backend has been modified
 ______
 ## Learn more
 You can learn more in the Create React App documentation.
