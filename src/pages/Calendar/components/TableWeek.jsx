@@ -12,8 +12,8 @@ function TableWeek({ getWeekDays, getWorkHours, courses, selectionHandler }) {
     const formatHour = (hour) => format(hour, 'HH:mm');
     // Define styles for the background of days of the week
     const dayOfWeekBackground = {
-        backgroundColor: 'LavenderBlush', // Background color
-        border: '3px ridge #007bff', // Border style
+        backgroundColor: 'Lavender', // Background color
+        border: '2px ridge #000000', // Border style
 
     };
     // Function for the PopUp view 
@@ -23,7 +23,7 @@ function TableWeek({ getWeekDays, getWorkHours, courses, selectionHandler }) {
     // Return JSX that represents a table with rows and columns for scheduling courses
     return (
         <div style={{ borderRadius: '5px', overflow: 'hidden' }}>
-            <div style={{ border: '1px dotted #007bff', borderRadius: '5px' }}>
+            <div style={{ border: '1px dotted #000000', borderRadius: '5px' }}>
                 <table id='weektable' style={{
                     borderCollapse: 'collapse',
                     width: '100%',
@@ -31,10 +31,10 @@ function TableWeek({ getWeekDays, getWorkHours, courses, selectionHandler }) {
                 }}>
                     <thead>
                         <tr style={{ height: '30px' }}>
-                            <th style={{ border: '1px ridge white', width: '50px' }}></th>
+                            <th style={{ border: '1px solid #000000', width: '50px' }}></th>
                             {getWeekDays().map((day) => (
                                 <th key={day.getTime()}
-                                style={{ border: '3px ridge #007bff', padding: '15px', ...dayOfWeekBackground, }}>
+                                style={{ border: '2px solid #000000', padding: '15px', ...dayOfWeekBackground, }}>
                                     {`${format(day, 'eeee')}: ${formatDay(day)} `}
                                 </th>
                             ))}
@@ -42,13 +42,13 @@ function TableWeek({ getWeekDays, getWorkHours, courses, selectionHandler }) {
                     </thead>
                     <tbody>
                         {getWorkHours().map((hour) => (
-                            <tr key={hour.getTime()} style={{ border: '3px ridge #007bff' }}>
-                                <td style={{ border: '3px ridge #007bff', textAlign: 'center' }}>{formatHour(hour)}</td>
+                            <tr key={hour.getTime()} style={{ border: '1px ridge #000000' }}>
+                                <td style={{ border: '1px ridge #000000', textAlign: 'center' }}>{formatHour(hour)}</td>
                                 {getWeekDays().map((day) => (
                                     <td
                                         key={`${hour.getTime()}-${day.getTime()}`}
                                         style={{
-                                            border: '3px ridge #007bff',
+                                            border: '1px ridge #000000',
                                         }}
                                     >
                                         {courses

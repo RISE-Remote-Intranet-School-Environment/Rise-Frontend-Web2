@@ -274,30 +274,26 @@ function Calendar() {
         border: '1px solid white ',
     };
     const calendarStyle = {
-
         fontFamily: 'Optima, sans-serif',
         maxWidth: '100%',
         margin: '0 auto',
         padding: '20px',
-        //border: '1px solid #ccc',
-
         boxShadow: '0 0 1px rgba(0, 0, 0, 0.1)',
-        backgroundColor: '#f9f9f9',
+        backgroundColor: 'RoyalBlue',
         //border: '500px solid blue navy',
     };
     const buttonStyle = {
         padding: '8px 16px',
         fontSize: '14px',
         cursor: 'pointer',
-
         border: 'none',
-        backgroundColor: '#007bff',
+        backgroundColor: 'RoyalBlue',
         color: 'white',
         marginRight: '10px',
     };
     const headerStyle: React.CSSProperties = {
         fontFamily: 'Optima, sans-serif',
-        background: '#007bff',
+        background: 'RoyalBlue',
         color: '#fff',
         padding: '15px',
         borderRadius: '5px 5px 0 0',
@@ -307,20 +303,19 @@ function Calendar() {
     const contentStyle = {
         fontFamily: 'Optima, sans-serif',
         background: '#fff',
-
         padding: '20px',
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
     };
     const footerStyle: React.CSSProperties = {
         fontFamily: 'Optima, sans-serif',
-        background: '#007bff',
+        background: 'RoyalBlue',
         color: '#fff',
         padding: '15px',
         borderRadius: '0 0 5px 5px',
         textAlign: 'center',
     }
 
-        return (
+    return (
         <>
             <Popup open={selectedCourse !== null} onClose={handleClosedPopup}>
                 <div>
@@ -343,16 +338,17 @@ function Calendar() {
                     <p>Selected date: {selectedDate ? format(selectedDate, 'dd/MM/yyyy') : 'No date selected'}</p>
                     <p>Selected month: {getSelectedMonthLabel()}</p>
 
-                    <button style={buttonStyle} onClick={viewMode === 'week' ? handleIncrementWeek : handleIncrementMonth}>
-                        {viewMode === 'week' ? 'Next week' : 'Next month'}
-                    </button>
                     <button style={buttonStyle} onClick={viewMode === 'week' ? handleDecrementWeek : handleDecrementMonth}>
                         {viewMode === 'week' ? 'Previous week' : 'Previous mounth'}
                     </button>
+                    <button style={buttonStyle} onClick={viewMode === 'week' ? handleIncrementWeek : handleIncrementMonth}>
+                        {viewMode === 'week' ? 'Next week' : 'Next month'}
+                    </button>
+
                     <button style={buttonStyle} onClick={handleSwitchViewMode}>{viewMode === 'week' ? 'View Monthly' : 'View Weekly'}</button>
                 </div>
 
-                {windowWidth > 700 && (
+                {windowWidth > 750 && (
                     <div className="table-container">
                         {selectedDate && viewMode === 'week' && (
 
@@ -374,7 +370,7 @@ function Calendar() {
                     </div>
                 )}
 
-                {windowWidth <= 700 && (
+                {windowWidth <= 750 && (
                     <div>
                         <List getWeekDays={getWeekDays} courses={courses} />
                     </div>
